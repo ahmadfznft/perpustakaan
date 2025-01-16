@@ -18,15 +18,17 @@ include "navbar.php";
 <body>
     <?php
 include "assets/link.php";
-$sql = "SELECT * FROM `kategori_buku` ORDER BY KategoriID ASC";
+$sql = "SELECT u.UserID, r.NamaRole AS Role, u.Username, u.Namalengkap, u.Alamat
+FROM user u
+JOIN role r ON u.RoleID = r.RoleID;";
 $kategori = mysqli_query($conn, $sql);
 ?>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-semibold text-center mb-6">Data Kategori</h1>
 
         <div class="flex justify-end mb-4">
-            <a href="tambah-kategori.php" class="bg-yellow-400 text-white px-4 py-2 rounded-lg shadow-md hover:bg-yellow-500">
-                <i class="bi bi-person-plus"></i> Tambah Data Kategori
+            <a href="tambah-user.php" class="bg-yellow-400 text-white px-4 py-2 rounded-lg shadow-md hover:bg-yellow-500">
+                <i class="bi bi-person-plus"></i> Tambah Data User
             </a>
         </div>
 
@@ -34,8 +36,11 @@ $kategori = mysqli_query($conn, $sql);
             <table id="example" class="min-w-full table-auto border-collapse">
                 <thead>
                     <tr>
-                        <th class="border px-4 py-2">ID Kategori</th>
-                        <th class="border px-4 py-2">Nama Kategori</th>
+                        <th class="border px-4 py-2">ID User</th>
+                        <th class="border px-4 py-2">Role</th>
+                        <th class="border px-4 py-2">Username</th>
+                        <th class="border px-4 py-2">Nama Lengkap</th>
+                        <th class="border px-4 py-2">Alamat</th>
                         <th class="border px-4 py-2">Aksi</th>
                     </tr>
                 </thead>
@@ -44,13 +49,16 @@ $kategori = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($kategori)) {
     ?>
                         <tr>
-                            <td class="border px-4 py-2"><?=$row['KategoriID'];?></td>
-                            <td class="border px-4 py-2"><?=$row['NamaKategori'];?></td>
+                            <td class="border px-4 py-2"><?=$row['UserID'];?></td>
+                            <td class="border px-4 py-2"><?=$row['Role'];?></td>
+                            <td class="border px-4 py-2"><?=$row['Username'];?></td>
+                            <td class="border px-4 py-2"><?=$row['Namalengkap'];?></td>
+                            <td class="border px-4 py-2"><?=$row['Alamat'];?></td>
                             <td class="border px-4 py-2">
-                                <a href="edit-kategori.php?id=<?=$row['KategoriID']?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                                <a href="edit-user.php?id=<?=$row['UserID']?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
                                     <i class="bi bi-pencil"></i> Edit
                                 </a>
-                                <a href="proses-kategori.php?id=<?=$row['KategoriID']?>" onclick="return konfirmasiHapus()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                <a href="proses-user.php?id=<?=$row['UserID']?>" onclick="return konfirmasiHapus()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
                                     <i class="bi bi-trash"></i> Hapus
                                 </a>
                             </td>

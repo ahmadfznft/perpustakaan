@@ -2,7 +2,7 @@
 include "connection.php";
 
 $user = $_POST['username'];
-$pw = ($_POST['pass']);
+$pw = md5($_POST['pass']);
 
 $query = mysqli_query(
     $conn,
@@ -28,11 +28,11 @@ if ($count > 0) {
     </script>";
     } elseif ($login['RoleID'] == 2) {
         echo "<script>alert('login berhasil');
-    window.location.href='home-peminjam.php';
+    window.location.href='home-petugas.php';
     </script>";
     } elseif ($login['RoleID'] == 3) {
         echo "<script>alert('login berhasil');
-    window.location.href='home.php';
+    window.location.href='home-peminjam.php';
     </script>";
     }
 } else {

@@ -53,7 +53,7 @@ include "connection.php";
                                 <a href="master-role.php" class="p-3 hover:text-white">Daftar Role </a>
                             </li>
                             <li class="sm:inline-block">
-                                <a href="#" class="p-3 hover:text-white">Daftar User</a>
+                                <a href="master-user.php" class="p-3 hover:text-white">Daftar User</a>
                             </li>
                         <?php } ?>
                         <!-- End !-->
@@ -63,12 +63,15 @@ include "connection.php";
                                 <a href="master-kategori.php" class="p-3 hover:text-white">Daftar Kategori</a>
                             </li>
                             <li class="sm:inline-block">
-                                <a href="#" class="p-3 hover:text-white">Daftar Buku</a>
+                                <a href="master-buku.php" class="p-3 hover:text-white">Daftar Buku</a>
                             </li>
                             <li class="sm:inline-block">
                                 <a href="#" class="p-3 hover:text-white">Laporan</a>
                             </li>
                         <?php } ?>
+                        <li class="sm:inline-block">
+                                <a href="logout.php" class="p-10 hover:text-white">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
