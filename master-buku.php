@@ -34,7 +34,7 @@ $q = mysqli_query($conn, $q);
             <table class="min-w-full table-auto" id="example">
                 <thead>
                     <tr class="bg-gray-200 text-left">
-                        <th class="py-2 px-4 border-b">Id Buku</th>
+                        <th class="py-2 px-4 border-b">ID Buku</th>
                         <th class="py-2 px-4 border-b">Judul</th>
                         <th class="py-2 px-4 border-b">Penulis</th>
                         <th class="py-2 px-4 border-b">Penerbit</th>
@@ -47,14 +47,16 @@ $q = mysqli_query($conn, $q);
                     <?php
 foreach ($q as $row) {?>
                         <tr class="border-b">
-                            <td class="py-2 px-4"><?=$row[''];?></td>
-                            <td class="py-2 px-4"><?=$row[''];?></td>
-                            <td class="py-2 px-4"><?=$row[''];?></td>
-                            <td class="py-2 px-4"><?=$row[''];?></td>
-                            <td class="py-2 px-4"><?=$row[''];?></td>
-                            <td class="py-2 px-4"><img src="" alt=""><?=$row[''];?></td>
+                            <td class="py-2 px-4"><?=$row['BukuID'];?></td>
+                            <td class="py-2 px-4"><?=$row['Judul'];?></td>
+                            <td class="py-2 px-4"><?=$row['Penulis'];?></td>
+                            <td class="py-2 px-4"><?=$row['Penerbit'];?></td>
+                            <td class="py-2 px-4"><?=$row['TahunTerbit'];?></td>
                             <td class="py-2 px-4">
-                                <a href="#" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-400">Detail</a>
+                                <img src="<?=$row['Gambar'];?>" alt="Gambar" class="w-24 h-24 object-cover">
+                            </td>
+                            <td class="py-2 px-4">
+                                <!-- <a href="#" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-400">Detail</a> -->
                                 <a href="edit-buku.php?id=<?=$row['BukuID']?>" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-400">Edit</a>
                                 <a href="proses-buku.php?id=<?=$row['BukuID']?>" onclick="return konfirmasiHapus()" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-400">Hapus</a>
                             </td>
