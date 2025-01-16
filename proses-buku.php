@@ -34,25 +34,25 @@ if (isset($_POST['submit'])) {
                     alert('Data Berhasil Disimpan');
                         window.location.href='master-buku.php';
                          </script>";
+                } else {
+                    echo "<script>
+                alert('Gagal Mengunggah Gambar');
+                window.location.href='tambah-buku.php';
+                </script>";
+                }
             } else {
                 echo "<script>
-                alert('Gagal Mengunggah Gambar');
+                alert('Ukuran File Gambar Terlalu Besar');
                 window.location.href='tambah-buku.php';
                 </script>";
             }
         } else {
             echo "<script>
-                alert('Ukuran File Gambar Terlalu Besar');
-                window.location.href='tambah-buku.php';
-                </script>";
-        }
-    } else {
-        echo "<script>
         alert('Terjadi Kesalahan Saat Menggungah File Gambar');
         window.location.href='master-buku.php';
         </script>";
+        }
     }
-}
 } elseif (isset($_POST['edit'])) {
     // Mengambil data dari form
     $id_buku = $_POST['id'];  // ID Buku yang akan diedit
@@ -123,4 +123,17 @@ if (isset($_POST['submit'])) {
         </script>";
     }
 }
-?>
+$id = $_GET['id'];
+$sql = "DELETE FROM buku WHERE BukuID=$id";
+$hapus = mysqli_query($conn, $sql);
+
+if ($hapus) {
+    $del = mysqli_query($conn, "ALTER TABLE buku AUTO_INCREMENT =$id");
+    echo "<script>alert('hapus berhasil');
+    window.location.href='master-buku.php';
+    </script>";
+} else {
+    echo "<script>alert('gagal di hapus');
+    window.location.href='master-buku.php';
+    </script>";
+}

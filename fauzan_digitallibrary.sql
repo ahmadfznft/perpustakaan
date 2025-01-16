@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Jan 2025 pada 06.30
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Jan 16, 2025 at 11:57 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,108 +24,137 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `buku`
+-- Table structure for table `buku`
 --
 
 CREATE TABLE `buku` (
-  `BukuID` int(11) NOT NULL,
-  `Judul` varchar(255) NOT NULL,
-  `Penulis` varchar(255) NOT NULL,
-  `Penerbit` varchar(255) NOT NULL,
-  `TahunTerbit` int(11) NOT NULL
+  `BukuID` int NOT NULL,
+  `Judul` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Penulis` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Penerbit` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `TahunTerbit` int NOT NULL,
+  `Gambar` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategoribuku_relasi`
+-- Table structure for table `kategoribuku_relasi`
 --
 
 CREATE TABLE `kategoribuku_relasi` (
-  `KategoriBukuID` int(11) NOT NULL,
-  `BukuID` int(11) NOT NULL,
-  `KategoriID` int(11) NOT NULL
+  `KategoriBukuID` int NOT NULL,
+  `BukuID` int NOT NULL,
+  `KategoriID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori_buku`
+-- Table structure for table `kategori_buku`
 --
 
 CREATE TABLE `kategori_buku` (
-  `KategoriID` int(11) NOT NULL,
-  `NamaKategori` int(11) NOT NULL
+  `KategoriID` int NOT NULL,
+  `NamaKategori` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `koleksipribadi`
+-- Table structure for table `koleksipribadi`
 --
 
 CREATE TABLE `koleksipribadi` (
-  `KoleksiID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `BukuID` int(11) NOT NULL
+  `KoleksiID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `BukuID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `peminjaman`
+-- Table structure for table `peminjaman`
 --
 
 CREATE TABLE `peminjaman` (
-  `PeminjamanID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `BukuID` int(11) NOT NULL,
+  `PeminjamanID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `BukuID` int NOT NULL,
   `TanggalPeminjaman` date NOT NULL,
   `TanggalPengembalian` date NOT NULL,
-  `StatusPeminjaman` varchar(50) NOT NULL
+  `StatusPeminjaman` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ulasanbuku`
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `RoleID` int NOT NULL,
+  `NamaRole` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`RoleID`, `NamaRole`) VALUES
+(1, 'admin'),
+(2, 'petugas'),
+(3, 'peminjam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ulasanbuku`
 --
 
 CREATE TABLE `ulasanbuku` (
-  `UlasanID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `BukuID` int(11) NOT NULL,
-  `Ulasan` text NOT NULL,
-  `Rating` int(11) NOT NULL
+  `UlasanID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `BukuID` int NOT NULL,
+  `Ulasan` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Rating` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
-  `UserID` int(11) NOT NULL,
-  `Username` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Namalengkap` varchar(255) NOT NULL,
-  `Alamat` text NOT NULL
+  `UserID` int NOT NULL,
+  `RoleID` int NOT NULL,
+  `Username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Namalengkap` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Alamat` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Namalengkap`, `Alamat`) VALUES
+(1, 1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 'admin', 'jalan jalan');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `buku`
+-- Indexes for table `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`BukuID`);
 
 --
--- Indeks untuk tabel `kategoribuku_relasi`
+-- Indexes for table `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
   ADD PRIMARY KEY (`KategoriBukuID`),
@@ -133,13 +162,13 @@ ALTER TABLE `kategoribuku_relasi`
   ADD UNIQUE KEY `KategoriID` (`KategoriID`);
 
 --
--- Indeks untuk tabel `kategori_buku`
+-- Indexes for table `kategori_buku`
 --
 ALTER TABLE `kategori_buku`
   ADD PRIMARY KEY (`KategoriID`);
 
 --
--- Indeks untuk tabel `koleksipribadi`
+-- Indexes for table `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
   ADD PRIMARY KEY (`KoleksiID`),
@@ -147,7 +176,7 @@ ALTER TABLE `koleksipribadi`
   ADD UNIQUE KEY `BukuID` (`BukuID`);
 
 --
--- Indeks untuk tabel `peminjaman`
+-- Indexes for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`PeminjamanID`),
@@ -155,7 +184,13 @@ ALTER TABLE `peminjaman`
   ADD UNIQUE KEY `BukuID` (`BukuID`);
 
 --
--- Indeks untuk tabel `ulasanbuku`
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`RoleID`);
+
+--
+-- Indexes for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
   ADD PRIMARY KEY (`UlasanID`),
@@ -163,84 +198,90 @@ ALTER TABLE `ulasanbuku`
   ADD UNIQUE KEY `BukuID` (`BukuID`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`UserID`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `buku`
+-- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `BukuID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `BukuID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `kategoribuku_relasi`
+-- AUTO_INCREMENT for table `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
-  MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KategoriBukuID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori_buku`
+-- AUTO_INCREMENT for table `kategori_buku`
 --
 ALTER TABLE `kategori_buku`
-  MODIFY `KategoriID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KategoriID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `koleksipribadi`
+-- AUTO_INCREMENT for table `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
-  MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KoleksiID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `peminjaman`
+-- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PeminjamanID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `ulasanbuku`
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `RoleID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
-  MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UlasanID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `kategoribuku_relasi`
+-- Constraints for table `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
   ADD CONSTRAINT `kategoribuku_relasi_ibfk_1` FOREIGN KEY (`BukuID`) REFERENCES `buku` (`BukuID`),
   ADD CONSTRAINT `kategoribuku_relasi_ibfk_2` FOREIGN KEY (`KategoriID`) REFERENCES `kategori_buku` (`KategoriID`);
 
 --
--- Ketidakleluasaan untuk tabel `koleksipribadi`
+-- Constraints for table `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
   ADD CONSTRAINT `koleksipribadi_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `koleksipribadi_ibfk_2` FOREIGN KEY (`BukuID`) REFERENCES `buku` (`BukuID`);
 
 --
--- Ketidakleluasaan untuk tabel `peminjaman`
+-- Constraints for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`BukuID`) REFERENCES `buku` (`BukuID`);
 
 --
--- Ketidakleluasaan untuk tabel `ulasanbuku`
+-- Constraints for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
   ADD CONSTRAINT `ulasanbuku_ibfk_1` FOREIGN KEY (`BukuID`) REFERENCES `buku` (`BukuID`),
