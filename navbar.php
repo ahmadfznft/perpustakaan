@@ -2,24 +2,6 @@
 include "connection.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-</head>
-
-<body>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-
-    <body>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" />
 
         <!-- Tailwind-css Navbar  -->
@@ -41,7 +23,7 @@ include "connection.php";
                             </li>
                         <?php } elseif ($_SESSION['RoleID'] == 3) { ?>
                             <li class="sm:inline-block">
-                                <a href="home-user.php" class="p-3 hover:text-white">Home</a>
+                                <a href="home-peminjam.php" class="p-3 hover:text-white">Home</a>
                             </li>
                         <?php } ?>
 
@@ -78,9 +60,3 @@ include "connection.php";
         </nav>
 
         <script src="https://cdn.tailwindcss.com"></script>
-    </body>
-
-    </html>
-</body>
-
-</html>
