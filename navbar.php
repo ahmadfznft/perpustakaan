@@ -51,9 +51,19 @@ include "connection.php";
                                 <a href="#" class="p-3 hover:text-white">Laporan</a>
                             </li>
                         <?php } ?>
-                        <li class="sm:inline-block">
-                                <a href="logout.php" class="p-10 hover:text-white">Logout</a>
-                        </li>
+                        
+                        <?php if ($_SESSION['RoleID'] == 3) { ?>
+                            <li class="sm:inline-block">
+                                <a href="peminjaman-buku.php" class="p-3 hover:text-white">Pinjam Buku</a>
+                            </li>
+                            <li class="sm:inline-block">
+                                <a href="favorit.php" class="p-3 hover:text-white">Favorit Saya     </a>
+                            </li>
+                            <?php } ?>
+                            
+                            <li class="sm:inline-block">
+                                    <a href="logout.php" class="p-10 hover:text-white">Logout</a>
+                            </li>
                     </ul>
                 </div>
             </div>

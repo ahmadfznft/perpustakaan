@@ -17,15 +17,20 @@ $result = mysqli_query($conn, $query);
            while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="images/<?php echo $row['gambar']; ?>" class="w-full h-48 object-cover" alt="Book Cover">
+                <div class="h-64"> <!-- Menambahkan div container untuk gambar -->
+                        <img src="<?php echo $row['Gambar']; ?>" class="w-full h-full object-contain">
+                    </div>
                     <div class="p-4">
-                        <h5 class="text-xl font-bold mb-2"><?php echo $row['judul']; ?></h5>
-                        <p class="text-gray-600 mb-1">Penulis: <?php echo $row['penulis']; ?></p>
-                        <p class="text-gray-600 mb-4">Stok: <?php echo $row['stok']; ?></p>
-                        <a href="pinjam.php?id=<?php echo $row['id_buku']; ?>"
+                        <h5 class="text-xl font-bold mb-2"><?php echo $row['Judul']; ?></h5>
+                        <p class="text-gray-600 mb-1">Penulis: <?php echo $row['Penulis']; ?></p>
+                        <a href="pinjam.php?id=<?php echo $row['BukuID']; ?>"
                             class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
                             Pinjam Buku
                         </a>
+                        <a href="detail-buku.php?id=<?php echo $row['BukuID']; ?>"
+                                class="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">
+                                Detail
+                            </a>
                     </div>
                 </div>
             <?php

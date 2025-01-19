@@ -23,26 +23,26 @@
 
                 <!-- Judul Buku -->
                 <div>
-                    <label for="namalengkap" class="block text-sm font-medium text-gray-700">Judul Buku</label>
+                    <label for="judulbuku" class="block text-sm font-medium text-gray-700">Judul Buku</label>
                     <input type="text" name="judul" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Judul Buku" required>
                 </div>
 
                 <!-- Penulis -->
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700">Penulis</label>
+                    <label for="penulis" class="block text-sm font-medium text-gray-700">Penulis</label>
                     <input type="text" name="penulis" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Penulis" required>
                 </div>
 
                 <!-- Penerbit -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Penerbit</label>
+                    <label for="penerbit" class="block text-sm font-medium text-gray-700">Penerbit</label>
                     <input type="text" name="penerbit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Penerbit" required>
                 </div>
 
                 <!-- Tahun Terbit -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Tahun Terbit</label>
-                    <input type="text" name="tahunterbit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Tahun Terbit" required>
+                    <label for="tahunterbit" class="block text-sm font-medium text-gray-700">Tahun Terbit</label>
+                    <input type="number" name="tahunterbit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Tahun Terbit" required>
                 </div>
 
                 <!-- Gambar -->

@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
                     echo "<script>
                     alert('Data Berhasil Disimpan');
                         window.location.href='master-buku.php';
-                         </script>";
+                        </script>";
                 } else {
                     echo "<script>
                 alert('Gagal Mengunggah Gambar');

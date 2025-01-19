@@ -45,7 +45,7 @@ $q = mysqli_query($conn, $q);
                         <tr class="hover:bg-gray-100">
                             <td class="py-2 px-4 border text-center"><?= $row['BukuID']; ?></td>
                             <td class="py-2 px-4 border text-center"><?= $row['Judul']; ?></td>
-                            <td class="py-2 px-4 border text-center"><?= $row['Pengarang']; ?></td>
+                            <td class="py-2 px-4 border text-center"><?= $row['Penulis']; ?></td>
                             <td class="py-2 px-4 border text-center"><?= $row['Penerbit']; ?></td>
                             <td class="py-2 px-4 border text-center"><?= $row['TahunTerbit']; ?></td>
                             <td class="py-2 px-4 border text-center">
