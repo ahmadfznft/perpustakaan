@@ -17,12 +17,12 @@ include "navbar.php";
 
 <body>
     <?php
-include "assets/link.php";
-$sql = "SELECT u.UserID, r.NamaRole AS Role, u.Username, u.Namalengkap, u.Alamat
+    include "assets/link.php";
+    $sql = "SELECT u.UserID, r.NamaRole AS Role, u.Username, u.Namalengkap, u.Alamat
 FROM user u
 JOIN role r ON u.RoleID = r.RoleID;";
-$kategori = mysqli_query($conn, $sql);
-?>
+    $kategori = mysqli_query($conn, $sql);
+    ?>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-semibold text-center mb-6">Data Kategori</h1>
 
@@ -46,25 +46,25 @@ $kategori = mysqli_query($conn, $sql);
                 </thead>
                 <tbody>
                     <?php
-while ($row = mysqli_fetch_assoc($kategori)) {
-    ?>
+                    while ($row = mysqli_fetch_assoc($kategori)) {
+                    ?>
                         <tr>
-                            <td class="border px-4 py-2"><?=$row['UserID'];?></td>
-                            <td class="border px-4 py-2"><?=$row['Role'];?></td>
-                            <td class="border px-4 py-2"><?=$row['Username'];?></td>
-                            <td class="border px-4 py-2"><?=$row['Namalengkap'];?></td>
-                            <td class="border px-4 py-2"><?=$row['Alamat'];?></td>
+                            <td class="border px-4 py-2"><?= $row['UserID']; ?></td>
+                            <td class="border px-4 py-2"><?= $row['Role']; ?></td>
+                            <td class="border px-4 py-2"><?= $row['Username']; ?></td>
+                            <td class="border px-4 py-2"><?= $row['Namalengkap']; ?></td>
+                            <td class="border px-4 py-2"><?= $row['Alamat']; ?></td>
                             <td class="border px-4 py-2">
-                                <a href="edit-user.php?id=<?=$row['UserID']?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                                <a href="edit-user.php?id=<?= $row['UserID'] ?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
                                     <i class="bi bi-pencil"></i> Edit
                                 </a>
-                                <a href="proses-user.php?id=<?=$row['UserID']?>" onclick="return konfirmasiHapus()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                <a href="proses-user.php?id=<?= $row['UserID'] ?>" onclick="return konfirmasiHapus()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
                                     <i class="bi bi-trash"></i> Hapus
                                 </a>
                             </td>
                         </tr>
                     <?php
-}?>
+                    } ?>
                 </tbody>
             </table>
         </div>
@@ -79,10 +79,10 @@ while ($row = mysqli_fetch_assoc($kategori)) {
         // Inisialisasi DataTable dengan opsi pagination dan search
         $(document).ready(function() {
             $('#example').DataTable({
-                "paging": true,          // Mengaktifkan pagination
-                "searching": true,       // Mengaktifkan pencarian
-                "lengthChange": true,    // Mengaktifkan dropdown entries
-                "pageLength": 5,         // Jumlah entri per halaman
+                "paging": true, // Mengaktifkan pagination
+                "searching": true, // Mengaktifkan pencarian
+                "lengthChange": true, // Mengaktifkan dropdown entries
+                "pageLength": 5, // Jumlah entri per halaman
                 "language": {
                     "lengthMenu": "Tampilkan _MENU_ entri per halaman",
                     "search": "Cari:",
