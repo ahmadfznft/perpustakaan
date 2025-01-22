@@ -11,6 +11,14 @@ if (isset($_POST['buku_id'])) {
     $stok_buku = $buku['Stok'];
 }
 
+if (isset($_GET['id'])) {
+    $buku_id = $_GET['id'];
+
+    $query_buku = "SELECT BukuID, Judul, Stok FROM buku WHERE BukuID = '$buku_id'";
+    $result_buku = mysqli_query($conn, $query_buku);
+    $buku = mysqli_fetch_assoc($result_buku);
+    $stok_buku = $buku['Stok'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,18 +41,9 @@ if (isset($_POST['buku_id'])) {
                 <h2 class="text-xl font-semibold mb-4">Form Peminjaman</h2>
                 <form method="POST" action="">
                     <div class="mb-4">
-                        <label class="block text-gray-700 mb-2">Pilih Buku:</label>
-                        <select name="buku_id" required class="w-full px-3 py-2 border rounded-lg" onchange="this.form.submit()">
-                            <option value="">-- Pilih Buku --</option>
-                            <?php
-                            // Ambil data buku dari database
-                            $query_buku = "SELECT BukuID, Judul FROM buku";
-                            $result_buku = mysqli_query($conn, $query_buku);
-                            while ($buku = mysqli_fetch_assoc($result_buku)) {
-                                echo "<option value='" . $buku['BukuID'] . "'>" . $buku['Judul'] . "</option>";
-                            }
-                            ?>
-                        </select>
+                        <label class="block text-gray-700 mb-2">Buku yang Dipilih:</label>
+                        <input type="hidden" name="buku_id" value="<?php echo $buku['BukuID']; ?>">
+                        <input type="text" value="<?php echo $buku['Judul']; ?>" class="w-full px-3 py-2 border rounded-lg bg-gray-100" readonly>
                     </div>
 
                     <div class="mb-4">

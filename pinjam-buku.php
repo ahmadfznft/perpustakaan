@@ -28,18 +28,11 @@ $result = mysqli_query($conn, $query);
         <div class="mt-6">
             <h1 class="text-3xl font-bold text-center mb-6">Pinjam Buku</h1>
 
-            <div class="flex justify-end mb-4">
-                <a href="tambah-peminjaman.php" class="bg-yellow-400 text-white px-4 py-2 rounded-lg shadow-md hover:bg-yellow-500">
-                    <i class="bi bi-person-plus"></i> Tambah Peminjaman
-                </a>
-            </div>
-
-
             <!-- Tabel Peminjaman -->
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-200">
                     <thead>
-                          <tr class="bg-gray-200">
+                        <tr class="bg-gray-200">
                             <th class="py-2 px-4 border">No</th>
                             <th class="py-2 px-4 border">Judul Buku</th>
                             <th class="py-2 px-4 border">Tanggal Peminjaman</th>
