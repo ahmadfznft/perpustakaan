@@ -34,7 +34,23 @@ $buku = mysqli_fetch_assoc($result);
                     <p class="text-gray-700 text-sm"><span class="font-medium">Penulis:</span> <?php echo $buku['Penulis']; ?></p>
                     <p class="text-gray-700 text-sm"><span class="font-medium">Penerbit:</span> <?php echo $buku['Penerbit']; ?></p>
                     <p class="text-gray-700 text-sm"><span class="font-medium">Tahun Terbit:</span> <?php echo $buku['TahunTerbit']; ?></p>
-                    <!-- <p class="text-gray-700 text-sm"><span class="font-medium">Kategori :</span> <?php echo $buku['TahunTerbit']; ?></p> -->
+                    <p class="text-gray-700 text-sm">
+                        <span class="font-medium">Deskripsi :</span>
+                        <span id="short-description"><?php echo mb_strimwidth($buku['Deskripsi'], 0, 150, "..."); ?></span>
+                        <span id="full-description" class="hidden"><?php echo $buku['Deskripsi']; ?></span>
+                        <a href="javascript:void(0)" id="toggle-description" class="text-blue-500">Baca Selengkapnya</a>
+                    </p>
+                    <p class="text-gray-700 text-sm mt-5">
+                        <span class="font-medium">Stok:</span>
+                        <?php
+                        if ($buku['Stok'] > 0) {
+                            echo "<span class='text-emerald-600'>" . $buku['Stok'] . "</span>";
+                        } else {
+                            echo "<span class='text-red-500'>Stok Habis</span>";
+                        }
+                        ?>
+                    </p>
+                    <!-- <p class="text-gray-700 text-sm"><span class="font-medium">Kategori :</span> <?php echo $buku['//']; ?></p> -->
 
                     <div class="actions flex gap-3 mt-4">
                         <a href="home-peminjam.php"
@@ -50,6 +66,25 @@ $buku = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('toggle-description').addEventListener('click', function() {
+            var fullDescription = document.getElementById('full-description');
+            var shortDescription = document.getElementById('short-description');
+            var toggleText = document.getElementById('toggle-description');
+
+            if (fullDescription.classList.contains('hidden')) {
+                fullDescription.classList.remove('hidden');
+                shortDescription.classList.add('hidden');
+                toggleText.textContent = 'Baca Lebih Sedikit';
+            } else {
+                fullDescription.classList.add('hidden');
+                shortDescription.classList.remove('hidden');
+                toggleText.textContent = 'Baca Selengkapnya';
+            }
+        });
+    </script>
+
 </body>
 
 </html>

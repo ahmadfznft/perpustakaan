@@ -67,7 +67,7 @@ $result = mysqli_query($conn, $query);
                                                 Edit
                                             </a>
                                         <?php endif; ?>
-                                        <?php if ($_SESSION['RoleID'] == 3) : ?>
+                                        <?php if ($_SESSION['RoleID'] == 3 || $_SESSION['RoleID'] == 1) : ?>
                                             <a href="proses-pinjam.php?hapus=<?= $row['PeminjamanID'] ?>"
                                                 onclick="return confirm('Yakin Untuk Membatalkan Peminjaman ?')"
                                                 class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
