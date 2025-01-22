@@ -6,7 +6,9 @@ if (isset($_POST['submit'])) {
     $judul = $_POST['judul'];
     $penulis = $_POST['penulis'];
     $penerbit = $_POST['penerbit'];
+    $deskripsi = $_POST['deskripsi'];
     $tahunTerbit = $_POST['tahunterbit'];
+    $stok = $_POST['stok'];
 
     // Mengambil informasi file gambar
     $file_name = $_FILES['gambar']['name'];
@@ -25,8 +27,8 @@ if (isset($_POST['submit'])) {
             // Memindahkan file gambar ke folder
             if (move_uploaded_file($file_tmp, $target_file)) {
                 // Query untuk memasukkan data ke dalam tabel Buku
-                $sql = "INSERT INTO buku (Judul, Penulis, Penerbit, TahunTerbit, Gambar) 
-                        VALUES ('$judul', '$penulis', '$penerbit', '$tahunTerbit', '$target_file')";
+                $sql = "INSERT INTO buku (Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, Stok) 
+                        VALUES ('$judul', '$penulis', '$penerbit', '$tahunTerbit', '$deskripsi', '$target_file', '$stok')";
 
                 // Mengeksekusi query
                 if (mysqli_query($conn, $sql)) {
@@ -59,7 +61,9 @@ if (isset($_POST['submit'])) {
     $judul = $_POST['judul'];
     $penulis = $_POST['penulis'];
     $penerbit = $_POST['penerbit'];
+    $deskripsi = $_POST['deskripsi'];
     $tahunTerbit = $_POST['tahunterbit'];
+    $stok = $_POST['stok'];
 
     // Mengambil informasi file gambar (jika ada)
     $gambar = $_FILES['gambar']['name'];
@@ -73,7 +77,9 @@ if (isset($_POST['submit'])) {
                 SET Judul = '$judul', 
                     Penulis = '$penulis', 
                     Penerbit = '$penerbit', 
-                    TahunTerbit = '$tahunTerbit' 
+                    Deskripsi = '$deskripsi',
+                    TahunTerbit = '$tahunTerbit',
+                    Stok = '$stok' 
                 WHERE BukuID = $id_buku";
         $result = mysqli_query($conn, $sql);
     } else {

@@ -27,11 +27,38 @@ if (isset($_POST['submit'])) {
                 window.location.href='ulasan.php';
               </script>";
     }
+} elseif (isset($_POST['update'])) {
+    $id = $_POST['ulasan_id'];
+    $rating = $_POST['rating'];
+    $ulasan = $_POST['ulasan'];
+    $user_id = $_SESSION['UserID'];
+
+    $check_query = "SELECT UserID FROM ulasanbuku WHERE UlasanID = '$id'";
+    $result = mysqli_query($conn, $check_query);
+    $data = mysqli_fetch_assoc($result);
+
+    if ($data['UserID'] != $user_id) {
+        echo "<script>
+                alert('Anda tidak berhak mengubah ulasan ini!');
+                window.location.href='ulasan.php';
+              </script>";
+        exit();
+    }
+
+    $query = "UPDATE ulasanbuku 
+              SET Rating='$rating', Ulasan='$ulasan' 
+              WHERE UlasanID='$id' AND UserID='$user_id'";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>
+                alert('Ulasan berhasil diupdate!');
+                window.location.href='ulasan.php';
+              </script>";
+    }
 } elseif (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
     $user_id = $_SESSION['UserID'];
 
-    // Cek apakah ulasan milik user yang sedang login
     $check_query = "SELECT UserID FROM ulasanbuku WHERE UlasanID = '$id'";
     $result = mysqli_query($conn, $check_query);
     $data = mysqli_fetch_assoc($result);
@@ -52,33 +79,4 @@ if (isset($_POST['submit'])) {
                 window.location.href='ulasan.php';
               </script>";
     }
-} elseif (isset($_POST['update'])) {
-    $id = $_POST['ulasan_id'];
-    $rating = $_POST['rating'];
-    $ulasan = $_POST['ulasan'];
-    $user_id = $_SESSION['UserID'];
-
-    // Cek apakah ulasan milik user yang sedang login
-    $check_query = "SELECT UserID FROM ulasan WHERE UlasanID = '$id'";
-    $result = mysqli_query($conn, $check_query);
-    $data = mysqli_fetch_assoc($result);
-
-    if ($data['UserID'] != $user_id) {
-        echo "<script>
-                alert('Anda tidak berhak mengubah ulasan ini!');
-                window.location.href='ulasan.php';
-              </script>";
-        exit();
-    }
-
-    $query = "UPDATE ulasan 
-              SET Rating='$rating', Ulasan='$ulasan' 
-              WHERE UlasanID='$id' AND UserID='$user_id'";
-
-    if (mysqli_query($conn, $query)) {
-        echo "<script>
-                alert('Ulasan berhasil diupdate!');
-                window.location.href='ulasan.php';
-              </script>";
-    }
-}
+} 

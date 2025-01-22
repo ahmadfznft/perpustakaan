@@ -34,6 +34,7 @@ $buku = mysqli_fetch_assoc($result);
                     <p class="text-gray-700 text-sm"><span class="font-medium">Penulis:</span> <?php echo $buku['Penulis']; ?></p>
                     <p class="text-gray-700 text-sm"><span class="font-medium">Penerbit:</span> <?php echo $buku['Penerbit']; ?></p>
                     <p class="text-gray-700 text-sm"><span class="font-medium">Tahun Terbit:</span> <?php echo $buku['TahunTerbit']; ?></p>
+                    <!-- <p class="text-gray-700 text-sm"><span class="font-medium">Kategori :</span> <?php echo $buku['TahunTerbit']; ?></p> -->
 
                     <div class="actions flex gap-3 mt-4">
                         <a href="home-peminjam.php"

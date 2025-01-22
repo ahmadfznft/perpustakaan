@@ -54,7 +54,7 @@
                 <!-- Nama User -->
                 <div>
                     <label for="namalengkap" class="block text-sm font-medium text-gray-700">Nama User</label>
-                    <input type="text" name="namalengkap" value="<?= $user['Namalengkap'] ?>" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Nama user" required>
+                    <input type="text" name="namalengkap" value="<?= $user['NamaLengkap'] ?>" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Nama user" required>
                 </div>
 
                 <!-- Username -->

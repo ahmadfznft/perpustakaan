@@ -25,7 +25,7 @@ $result = mysqli_query($conn, $query);
                     <div class="p-4">
                         <h5 class="text-xl font-bold mb-2"><?php echo $row['Judul']; ?></h5>
                         <p class="text-gray-600 mb-1">Penulis: <?php echo $row['Penulis']; ?></p>
-                        <a href="pinjam.php?id=<?php echo $row['BukuID']; ?>"
+                        <a href="tambah-peminjaman.php?id=<?php echo $row['BukuID']; ?>"
                             class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
                             Pinjam Buku
                         </a>

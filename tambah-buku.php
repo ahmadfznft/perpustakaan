@@ -11,8 +11,8 @@
 
 <body>
 
-    <?php 
-    include "navbar.php"; 
+    <?php
+    include "navbar.php";
     ?>
 
     <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
@@ -45,10 +45,22 @@
                     <input type="number" name="tahunterbit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Masukkan Tahun Terbit" required>
                 </div>
 
+                <!-- Deskripsi -->
+                <div>
+                    <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
+                    <textarea name="deskripsi" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
+                </div>
+
                 <!-- Gambar -->
                 <div>
                     <label for="gambar" class="block text-sm font-medium text-gray-700">Gambar</label>
                     <input type="file" name="gambar" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                </div>
+
+                <!-- Stok -->
+                <div>
+                    <label for="gambar" class="block text-sm font-medium text-gray-700">Stok</label>
+                    <input type="number" name="stok" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
                 </div>
 
                 <!-- Submit Button -->
