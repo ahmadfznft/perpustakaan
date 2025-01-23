@@ -1,9 +1,15 @@
 <?php
-include "navbar.php";
-include 'favorit.php';
+include 'navbar.php';
 
 $query = "SELECT * FROM buku";
 $result = mysqli_query($conn, $query);
+
+// function cekFavorit($conn, $userID, $bukuID)
+// {
+//     $query = "SELECT * FROM favorit WHERE UserID = '$userID' AND BukuID = '$bukuID'";
+//     $result = mysqli_query($conn, $query);
+//     return mysqli_num_rows($result) > 0;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +43,6 @@ $result = mysqli_query($conn, $query);
 
                         <form action="favorit.php" method="POST" class="inline">
                             <input type="hidden" name="id_produk" value="<?php echo $row['BukuID']; ?>">
-                            <?php
-                            $sudah_favorit = cekFavorit($_SESSION['UserID'], $row['BukuID']);
-                            if ($sudah_favorit): ?>
-                                <button type="submit" name="hapus_favorit"
-                                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors">
-                                    ❤️ Favorit
-                                </button>
-                            <?php else: ?>
-                                <button type="submit" name="tambah_favorit"
-                                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors">
-                                    🤍 Favorit
-                                </button>
-                            <?php endif; ?>
                         </form>
                     </div>
                 </div>

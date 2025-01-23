@@ -1,7 +1,5 @@
-<?php
-session_start();
+<!-- <?php
 include 'connection.php';
-include 'favorit.php';
 
 if(isset($_POST['tambah_favorit'])) {
     $id_user = $_SESSION['id_user'];
@@ -21,4 +19,4 @@ if(isset($_POST['hapus_favorit'])) {
         echo "<script>alert('Berhasil dihapus dari favorit');</script>";
         echo "<script>window.location.href='home-peminjam.php';</script>";
     }
-}
+} -->
