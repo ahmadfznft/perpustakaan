@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     $result_stok = mysqli_query($conn, $query_stok);
     $buku = mysqli_fetch_assoc($result_stok);
     $stok_buku = $buku['Stok'];
-
+           
     // Cek Stok
     if ($stok_buku > 0) {
 

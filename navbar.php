@@ -48,7 +48,10 @@ include "connection.php";
                                 <a href="master-buku.php" class="p-3 hover:text-white">Daftar Buku</a>
                             </li>
                             <li class="sm:inline-block">
-                                <a href="#" class="p-3 hover:text-white">Laporan</a>
+                                <a href="laporan.php" class="p-3 hover:text-white">Laporan</a>
+                            </li>
+                            <li class="sm:inline-block">
+                                <a href="data-peminjam.php" class="p-3 hover:text-white">Data Peminjam</a>
                             </li>
                         <?php } ?>
                         
