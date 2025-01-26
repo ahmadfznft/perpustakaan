@@ -4,6 +4,14 @@ include 'navbar.php';
 $query = "SELECT * FROM buku";
 $result = mysqli_query($conn, $query);
 
+$qrating = "SELECT b.*, 
+          COALESCE(AVG(u.Rating), 0) as RataRata, 
+          COUNT(u.UlasanID) as JumlahRating 
+          FROM buku b 
+          LEFT JOIN ulasanbuku u ON b.BukuID = u.BukuID 
+          GROUP BY b.BukuID";
+$result = mysqli_query($conn, $qrating);
+
 // function cekFavorit($conn, $userID, $bukuID)
 // {
 //     $query = "SELECT * FROM favorit WHERE UserID = '$userID' AND BukuID = '$bukuID'";
@@ -32,6 +40,10 @@ $result = mysqli_query($conn, $query);
                     <div class="p-4">
                         <h5 class="text-xl font-bold mb-2"><?php echo $row['Judul']; ?></h5>
                         <p class="text-gray-600 mb-1">Penulis: <?php echo $row['Penulis']; ?></p>
+
+                        <?php $rating = round($row['RataRata']); ?>
+                        <p class="text-gray-600 mb-3">Rating: <?php echo $rating; ?> (<?php echo $row['JumlahRating']; ?> ulasan)</p>
+
                         <a href="tambah-peminjaman.php?id=<?php echo $row['BukuID']; ?>"
                             class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
                             Pinjam Buku

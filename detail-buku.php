@@ -8,6 +8,13 @@ $id_buku = $_GET['id'];
 $query = "SELECT * FROM buku WHERE BukuID = $id_buku";
 $result = mysqli_query($conn, $query);
 $buku = mysqli_fetch_assoc($result);
+
+$qulasan = "SELECT ulasanbuku.*, user.Username 
+                   FROM ulasanbuku 
+                   JOIN user ON ulasanbuku.UserID = user.UserID 
+                   WHERE ulasanbuku.BukuID = $id_buku";
+$result_komentar = mysqli_query($conn, $qulasan);
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +57,35 @@ $buku = mysqli_fetch_assoc($result);
                         }
                         ?>
                     </p>
-                    <!-- <p class="text-gray-700 text-sm"><span class="font-medium">Kategori :</span> <?php echo $buku['//']; ?></p> -->
+
+
+                    <div class="border-b py-2">
+                        <?php while ($komentar = mysqli_fetch_assoc($result_komentar)) : ?>
+                            <p class="font-semibold"><?php echo $komentar['Username']; ?></p>
+                            <p><?php echo $komentar['Ulasan']; ?></p>
+
+                            <!-- Form untuk balasan -->
+                            <form action="proses-balasan.php" method="POST" class="mt-2">
+                                <input type="hidden" name="komentar_id" value="<?php echo $komentar['UlasanID']; ?>">
+                                <textarea name="balasan" rows="2" class="w-full border rounded-lg p-2" placeholder="Balas komentar..."></textarea>
+                                <button type="submit" class="mt-1 px-4 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">Balas</button>
+                            </form
+
+                            <!-- Tampilkan balasan jika ada -->
+                            <div class="ml-4">
+                                <?php
+                                // Query untuk mengambil balasan berdasarkan komentar
+                                $query_balasan = "SELECT * FROM balasan WHERE KomentarID = " . $komentar['UlasanID'];
+                                $result_balasan = mysqli_query($conn, $query_balasan);
+                                while ($balasan = mysqli_fetch_assoc($result_balasan)) : ?>
+                                    <p class="font-semibold"><?php echo $balasan['Username']; ?></p>
+                                    <p><?php echo $balasan['Balasan']; ?></p>
+                                <?php endwhile; ?>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+
+
 
                     <div class="actions flex gap-3 mt-4">
                         <a href="home-peminjam.php"
