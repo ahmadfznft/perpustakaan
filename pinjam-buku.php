@@ -53,6 +53,7 @@ $result = mysqli_query($conn, $query);
                                     <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
                                     <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>
                                     <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
+
                                     <td class="py-2 px-4 border text-center">
                                         <?php if ($_SESSION['RoleID'] == 1) : ?>
                                             <a href="edit-ulasan.php?id=<?= $row['PeminjamanID'] ?>"
@@ -61,11 +62,14 @@ $result = mysqli_query($conn, $query);
                                             </a>
                                         <?php endif; ?>
                                         <?php if ($_SESSION['RoleID'] == 3 || $_SESSION['RoleID'] == 1) : ?>
-                                            <a href="proses-pinjam.php?hapus=<?= $row['PeminjamanID'] ?>"
-                                                onclick="return confirm('Yakin Untuk Membatalkan Peminjaman ?')"
-                                                class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-                                                Hapus
-                                            </a>
+                                            <?php if (trim($row['StatusPeminjaman']) != 'Sudah Dikembalikan') :
+                                            ?>
+                                                <a href="proses-pinjam.php?hapus=<?= $row['PeminjamanID'] ?>"
+                                                    onclick="return confirm('Yakin Untuk Membatalkan Peminjaman ?')"
+                                                    class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                                                    Hapus
+                                                </a>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

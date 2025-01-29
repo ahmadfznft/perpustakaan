@@ -1,15 +1,39 @@
 <?php
 include 'connection.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $buku_id = $_POST['buku_id'];
-    $komentar = $_POST['komentar'];
-    $user_id = 1;
+if (isset($_POST['komentar'])) {
+    $bukuID = $_POST['buku_id'];
+    $isikomentar = $_POST['komentar'];
+    $userid = $_SESSION['UserID'];
 
-    $query = "INSERT INTO ulasanbuku (BukuID, UserID, Ulasan) VALUES ('$buku_id', '$user_id', '$komentar')";
-    mysqli_query($conn, $query);
+    if ($parentID) {
+        $query = "INSERT INTO ulasanbuku (UserID, BukuID, Ulasan, tanggalUlasan) 
+                  VALUES ('$userid', '$bukuID', '$isikomentar', NOW())";
+    } else {
+        $query = "INSERT INTO ulasanbuku (UserID, BukuID, Ulasan, tanggalUlasan) 
+                  VALUES ('$userid', '$bukuID', '$isikomentar', NOW())";
+    }
 
-    header("Location: detail-buku.php?id=$buku_id");
-    exit();
+    if (mysqli_query($conn, $query)) {
+        header("Location: detail-buku.php?id=$bukuID");
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
-?>
+
+// if (isset($_POST['reply_komentar'])) {
+//     $bukuID = $_POST['buku_id'];
+//     $isikomentar = $_POST['reply_komentar'];
+//     $userid = $_SESSION['UserID'];
+//     $parentID = $_POST['parent_id']; // Mengambil ID parent dari form
+
+//     $query = "INSERT INTO ulasanbuku (UserID, BukuID, Ulasan, ParentID, tanggalUlasan) 
+//               VALUES ('$userid', '$bukuID', '$isikomentar', '$parentID', NOW())";
+
+//     if (mysqli_query($conn, $query)) {
+//         header("Location: detail-buku.php?id=$bukuID");
+//     } else {
+//         echo "Error: " . mysqli_error($conn);
+//     }
+// }
+// ?>

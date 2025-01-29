@@ -1,9 +1,11 @@
 <?php
 include 'navbar.php';
 
+
 // Ambil ID buku dari parameter URL
 $id_buku = $_GET['id'];
 
+// Cek apakah pengguna sudah memberikan rating
 // Query untuk mengambil detail buku
 $query = "SELECT * FROM buku WHERE BukuID = $id_buku";
 $result = mysqli_query($conn, $query);
@@ -23,6 +25,24 @@ $result_komentar = mysqli_query($conn, $qulasan);
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
+<style>
+    .comments-section {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .input-comment {
+        background-color: #F0F2F5;
+    }
+
+    .comment-actions button {
+        color: #65676B;
+    }
+
+    .comment-actions button:hover {
+        color: #1C1E21;
+    }
+</style>
 
 <body class="bg-gray-100">
     <div class="container mx-auto max-w-5xl px-4 py-6">
@@ -59,47 +79,69 @@ $result_komentar = mysqli_query($conn, $qulasan);
                     </p>
 
 
-                    <div class="border-b py-2">
-                        <?php while ($komentar = mysqli_fetch_assoc($result_komentar)) : ?>
-                            <p class="font-semibold"><?php echo $komentar['Username']; ?></p>
-                            <p><?php echo $komentar['Ulasan']; ?></p>
 
-                            <!-- Form untuk balasan -->
-                            <form action="proses-balasan.php" method="POST" class="mt-2">
-                                <input type="hidden" name="komentar_id" value="<?php echo $komentar['UlasanID']; ?>">
-                                <textarea name="balasan" rows="2" class="w-full border rounded-lg p-2" placeholder="Balas komentar..."></textarea>
-                                <button type="submit" class="mt-1 px-4 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">Balas</button>
-                            </form
 
-                            <!-- Tampilkan balasan jika ada -->
-                            <div class="ml-4">
-                                <?php
-                                // Query untuk mengambil balasan berdasarkan komentar
-                                $query_balasan = "SELECT * FROM balasan WHERE KomentarID = " . $komentar['UlasanID'];
-                                $result_balasan = mysqli_query($conn, $query_balasan);
-                                while ($balasan = mysqli_fetch_assoc($result_balasan)) : ?>
-                                    <p class="font-semibold"><?php echo $balasan['Username']; ?></p>
-                                    <p><?php echo $balasan['Balasan']; ?></p>
-                                <?php endwhile; ?>
-                            </div>
-                        <?php endwhile; ?>
+                    <div class="comments-section bg-gray-100 p-4">
+                        <div class="space-y-4">
+                            <?php while ($komentar = mysqli_fetch_assoc($result_komentar)) : ?>
+                                <div class="flex gap-3">
+                                    <!-- Avatar -->
+                                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-sm font-medium">
+                                            <?php echo substr($komentar['Username'], 0, 1); ?>
+                                        </span>
+                                    </div>
+
+                                    <!-- Komentar content -->
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold"><?php echo $komentar['Username']; ?></span>
+                                            <span><?php echo $komentar['Ulasan']; ?></span>
+                                        </div>
+
+
+                                        <!-- Aksi komentar -->
+                                        <div class="flex items-center gap-4 mt-1 text-sm text-gray-500">
+                                            <span><?php echo date('d M Y', strtotime($komentar['tanggalUlasan'])); ?></span>
+                                            <!-- <button class="hover:underline" onclick="toggleReplyForm(<?php echo $komentar['UlasanID']; ?>)">Balas</button> -->
+                                        </div>
+                                        <!-- Form balasan -->
+                                        <!-- <form id="reply-form-<?php echo $komentar['UlasanID']; ?>" class="hidden mt-2" action="proses-ulasan.php" method="POST">
+                                            <input type="hidden" name="buku_id" value="<?php echo $id_buku; ?>">
+                                            <input type="hidden" name="parent_id" value="<?php echo $komentar['UlasanID']; ?>">
+                                            <div class="bg-gray-200 rounded-full p-3 flex items-center">
+                                                <input type="text" name="reply_komentar" placeholder="Balas komentar" class="flex-1 bg-transparent outline-none px-2" required>
+                                                <button type="submit" class="text-blue-500 font-semibold">Kirim</button>
+                                            </div>
+                                        </form> -->
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
                     </div>
 
+                    <form action="proses-ulasan.php" method="POST" class="mt-4">
+                        <input type="hidden" name="buku_id" value="<?php echo $id_buku; ?>">
+                        <div class="bg-gray-200 rounded-full p-3 flex items-center">
+                            <input type="text" name="komentar" placeholder="Tambahkan komentar" class="flex-1 bg-transparent outline-none px-2" required>
+                            <button type="submit" class="text-blue-500 font-semibold">Kirim</button>
+                        </div>
+                    </form>
+                </div>
 
-
-                    <div class="actions flex gap-3 mt-4">
-                        <a href="home-peminjam.php"
-                            class="px-4 py-1.5 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                            Kembali
-                        </a>
-                        <a href="pinjam-buku.php?id=<?php echo $buku['BukuID']; ?>"
-                            class="px-4 py-1.5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors">
-                            Pinjam Buku
-                        </a>
-                    </div>
+                <div class="actions flex gap-3 mt-4">
+                    <a href="home-peminjam.php"
+                        class="px-4 py-1.5 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
+                        Kembali
+                    </a>
+                    <a href="pinjam-buku.php?id=<?php echo $buku['BukuID']; ?>"
+                        class="px-4 py-1.5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors">
+                        Pinjam Buku
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script>
@@ -118,6 +160,19 @@ $result_komentar = mysqli_query($conn, $qulasan);
                 toggleText.textContent = 'Baca Selengkapnya';
             }
         });
+    </script>
+
+
+    <script>
+        function toggleReplyForm(id) {
+            const form = document.getElementById('reply-form-' + id);
+            form.classList.toggle('hidden');
+        }
+
+        function toggleDropdown(event) {
+            const dropdown = event.target.nextElementSibling;
+            dropdown.classList.toggle('hidden');
+        }
     </script>
 
 </body>

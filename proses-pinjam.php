@@ -8,12 +8,24 @@ if (isset($_POST['submit'])) {
     $status_peminjaman = 'Dipinjam';
     $user_id = $_SESSION['UserID'];
 
+    // cek user sudah meminjam buku atau belum
+    $query_check = "SELECT COUNT(*) as total FROM peminjaman WHERE UserID = '$user_id' AND StatusPeminjaman = 'Dipinjam'";
+    $result_check = mysqli_query($conn, $query_check);
+    $data_check = mysqli_fetch_assoc($result_check);
+
+    if ($data_check['total'] > 0) {
+        echo "<script>
+                alert('Anda sudah meminjam satu buku, tidak bisa meminjam buku lain.');
+                window.location.href='home-peminjam.php';
+            </script>";
+        exit;
+    }
+
+    // Cek Stok
     $query_stok = "SELECT Stok FROM buku WHERE BukuID = '$buku_id'";
     $result_stok = mysqli_query($conn, $query_stok);
     $buku = mysqli_fetch_assoc($result_stok);
     $stok_buku = $buku['Stok'];
-           
-    // Cek Stok
     if ($stok_buku > 0) {
 
         $new_stok = $stok_buku - 1;
@@ -42,12 +54,12 @@ if (isset($_POST['submit'])) {
     }
 }
 
+//hapus buku + jika dihapus stok kembali
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
 
     $id = mysqli_real_escape_string($conn, $id);
 
-    // Ambil BukuID
     $query_buku_id = "SELECT BukuID FROM peminjaman WHERE PeminjamanID = '$id'";
     $result_buku_id = mysqli_query($conn, $query_buku_id);
     $buku_data = mysqli_fetch_assoc($result_buku_id);
@@ -57,7 +69,6 @@ if (isset($_GET['hapus'])) {
     $hapus = mysqli_query($conn, $sql);
 
     if ($hapus) {
-        //stok buku kembali
         $query_stok = "SELECT Stok FROM buku WHERE BukuID = '$buku_id'";
         $result_stok = mysqli_query($conn, $query_stok);
         $buku = mysqli_fetch_assoc($result_stok);

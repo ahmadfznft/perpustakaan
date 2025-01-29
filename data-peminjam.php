@@ -41,15 +41,14 @@ $result = mysqli_query($conn, $query);
                     ?>
                         <tr class="hover:bg-gray-100">
                             <td class="py-2 px-4 border text-center"><?= $no++; ?></td>
-                            <td class="py-2 px-4 border"><?= $row['Nama'] ?: 'Data Tidak Tersedia'; ?></td>
+                            <td class="py-2 px-4 border"><?= $row['Username'] ?: 'Data Tidak Tersedia'; ?></td>
                             <td class="py-2 px-4 border"><?= $row['Judul'] ?: 'Data Tidak Tersedia'; ?></td>
                             <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
                             <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>
                             <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
                             <td class="py-2 px-4 border">
                                 <?php if ($row['StatusPeminjaman'] != 'Sudah Dikembalikan') { ?>
-                                    <a href="proses-data-peminjam.php?ubah=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Ubah Status</a>
-                                    <a href="proses-data-peminjaman.php?hapus=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" onclick="return confirm('Apakah Anda yakin ingin menghapus peminjaman ini?')">Hapus</a>
+                                    <a href="proses-peminjaman.php?ubah=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Ubah Status</a>
                                 <?php } else { ?>
                                     <span class="text-green-500">Sudah Dikembalikan</span>
                                 <?php } ?>

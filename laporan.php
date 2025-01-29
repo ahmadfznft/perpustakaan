@@ -3,17 +3,30 @@ include 'navbar.php';
 
 $start_date = '';
 $end_date = '';
+$query = "";
 
 if (isset($_POST['submit'])) {
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
+    if (empty($_POST['start_date']) || empty($_POST['end_date'])) {
+        echo "<script>alert('Silakan pilih tanggal mulai dan tanggal akhir.');</script>";
+    } else {
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
 
-    $query = "SELECT * 
-              FROM peminjaman 
-              LEFT JOIN user ON user.UserID = peminjaman.UserID 
-              LEFT JOIN buku ON buku.BukuID = peminjaman.BukuID
-              WHERE TanggalPeminjaman BETWEEN '$start_date' AND '$end_date'";
-} else {
+        // Validasi tanggal
+        if ($start_date > $end_date) {
+            echo "<script>alert('Tanggal akhir tidak boleh lebih awal dari tanggal mulai.');</script>";
+        } else {
+            $query = "SELECT * 
+                      FROM peminjaman 
+                      LEFT JOIN user ON user.UserID = peminjaman.UserID 
+                      LEFT JOIN buku ON buku.BukuID = peminjaman.BukuID
+                      WHERE TanggalPeminjaman BETWEEN '$start_date' AND '$end_date'";
+        }
+    }
+}
+
+// Jika tidak ada input dari form, gunakan query default
+if (empty($query)) {
     $query = "SELECT * 
               FROM peminjaman 
               LEFT JOIN user ON user.UserID = peminjaman.UserID 
@@ -37,7 +50,7 @@ $result = mysqli_query($conn, $query);
     <div class="container mx-auto px-4">
         <div class="mt-6">
             <div class="flex justify-between items-center mb-6">
- 
+
                 <h1 class="text-3xl font-bold">Laporan Peminjaman Buku</h1>
 
                 <div class="flex space-x-4">
@@ -55,9 +68,15 @@ $result = mysqli_query($conn, $query);
                         </div>
                     </form>
 
-                    <a href="laporan-cetak.php?start_date=<?= $start_date ?>&end_date=<?= $end_date ?>" target="_blank" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-                        Cetak Laporan
-                    </a>
+                    <div>
+                        <form method="GET" action="laporan-cetak.php" target="_blank">
+                            <input type="hidden" name="start_date" value="<?= $start_date ?>">
+                            <input type="hidden" name="end_date" value="<?= $end_date ?>">
+                            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+                                Cetak Laporan
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -82,7 +101,7 @@ $result = mysqli_query($conn, $query);
                         ?>
                                 <tr class="hover:bg-gray-100">
                                     <td class="py-2 px-4 border text-center"><?= $no++; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['Nama'] ?: 'Data Tidak Tersedia'; ?></td>
+                                    <td class="py-2 px-4 border"><?= $row['Username'] ?: 'Data Tidak Tersedia'; ?></td>
                                     <td class="py-2 px-4 border"><?= $row['Judul'] ?: 'Data Tidak Tersedia'; ?></td>
                                     <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
                                     <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>

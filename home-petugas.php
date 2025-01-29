@@ -24,18 +24,6 @@
             <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white p-4 shadow-md rounded">
-                    <a href="master-role.php" class="block">
-                        <h2 class="font-bold">Daftar Role</h2>
-                        <p>Jumlah role: <?php echo $roleCount; ?></p>
-                    </a>
-                </div>
-                <div class="bg-white p-4 shadow-md rounded">
-                    <a href="master-user.php" class="block">
-                        <h2 class="font-bold">Daftar Pengguna</h2>
-                        <p>Jumlah pengguna: <?php echo $userCount; ?></p>
-                    </a>
-                </div>
-                <div class="bg-white p-4 shadow-md rounded">
                     <a href="master-kategori.php" class="block">
                         <h2 class="font-bold">Daftar Kategori</h2>
                         <p>Jumlah kategori: <?php echo $categoryCount; ?></p>
