@@ -4,6 +4,16 @@ include 'connection.php';
 $start_date = $_GET['start_date'] ?? '';
 $end_date = $_GET['end_date'] ?? '';
 
+if (!$start_date || !$end_date) {
+    echo "<script>alert('Silakan pilih tanggal mulai dan tanggal akhir.'); window.location.href = 'laporan.php';</script>";
+    exit;
+}
+
+if ($end_date < $start_date) {
+    echo "<script>alert('Tanggal akhir tidak boleh lebih awal dari tanggal mulai.'); window.location.href = 'laporan.php';</script>";
+    exit;
+}
+
 $query = "SELECT * 
           FROM peminjaman 
           LEFT JOIN user ON user.UserID = peminjaman.UserID 
@@ -27,15 +37,19 @@ $result = mysqli_query($conn, $query);
         body {
             font-family: Arial, sans-serif;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #000;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }

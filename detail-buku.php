@@ -1,15 +1,17 @@
 <?php
 include 'navbar.php';
 
-
-// Ambil ID buku dari parameter URL
 $id_buku = $_GET['id'];
 
-// Cek apakah pengguna sudah memberikan rating
-// Query untuk mengambil detail buku
 $query = "SELECT * FROM buku WHERE BukuID = $id_buku";
 $result = mysqli_query($conn, $query);
 $buku = mysqli_fetch_assoc($result);
+
+$query_kategori = "SELECT kategori_buku.NamaKategori 
+                   FROM kategoribuku_relasi 
+                   JOIN kategori_buku ON kategoribuku_relasi.KategoriID = kategori_buku.KategoriID 
+                   WHERE kategoribuku_relasi.BukuID = $id_buku";
+$result_kategori = mysqli_query($conn, $query_kategori);
 
 $qulasan = "SELECT ulasanbuku.*, user.Username 
                    FROM ulasanbuku 
@@ -67,6 +69,15 @@ $result_komentar = mysqli_query($conn, $qulasan);
                         <span id="full-description" class="hidden"><?php echo $buku['Deskripsi']; ?></span>
                         <a href="javascript:void(0)" id="toggle-description" class="text-blue-500">Baca Selengkapnya</a>
                     </p>
+                    <p class="text-gray-700 text-sm"><span class="font-medium">Kategori:</span>
+                        <?php
+                        $kategori_list = [];
+                        while ($kategori = mysqli_fetch_assoc($result_kategori)) {
+                            $kategori_list[] = "<span class='text-sm text-dark'>" . $kategori['NamaKategori'] . "</span>";
+                        }
+                        echo implode(", ", $kategori_list);
+                        ?>
+                    </p>
                     <p class="text-gray-700 text-sm mt-5">
                         <span class="font-medium">Stok:</span>
                         <?php
@@ -79,8 +90,7 @@ $result_komentar = mysqli_query($conn, $qulasan);
                     </p>
 
 
-
-
+                    <!-- Komentar -->
                     <div class="comments-section bg-gray-100 p-4">
                         <div class="space-y-4">
                             <?php while ($komentar = mysqli_fetch_assoc($result_komentar)) : ?>
@@ -128,13 +138,19 @@ $result_komentar = mysqli_query($conn, $qulasan);
                         </div>
                     </form>
                 </div>
+                <!-- End -->
+
 
                 <div class="actions flex gap-3 mt-4">
                     <a href="home-peminjam.php"
                         class="px-4 py-1.5 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
                         Kembali
                     </a>
-                    <a href="pinjam-buku.php?id=<?php echo $buku['BukuID']; ?>"
+                    <a href="proses-koleksi.php"
+                        class="px-4 py-1.5 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
+                        Tambah-Favorit
+                    </a>
+                    <a href="tambah-peminjaman.php?id=<?php echo $buku['BukuID']; ?>"
                         class="px-4 py-1.5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors">
                         Pinjam Buku
                     </a>
@@ -162,7 +178,7 @@ $result_komentar = mysqli_query($conn, $qulasan);
         });
     </script>
 
-
+    <!-- 
     <script>
         function toggleReplyForm(id) {
             const form = document.getElementById('reply-form-' + id);
@@ -173,7 +189,7 @@ $result_komentar = mysqli_query($conn, $qulasan);
             const dropdown = event.target.nextElementSibling;
             dropdown.classList.toggle('hidden');
         }
-    </script>
+    </script> -->
 
 </body>
 

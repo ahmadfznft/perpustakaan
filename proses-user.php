@@ -3,7 +3,7 @@ include "connection.php";
 if (isset($_POST['submit'])) {
     $namalengkap = $_POST['namalengkap'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
     $alamat = $_POST['alamat'];
     $roleID = $_POST['roleID'];
     $username = $_POST['username'];

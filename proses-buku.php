@@ -1,14 +1,14 @@
 <?php
-include "connection.php"; // Pastikan file koneksi ke database sudah benar
+include "connection.php";
 
 if (isset($_POST['submit'])) {
-    // Mengambil data dari form
     $judul = $_POST['judul'];
     $penulis = $_POST['penulis'];
     $penerbit = $_POST['penerbit'];
     $deskripsi = $_POST['deskripsi'];
     $tahunTerbit = $_POST['tahunterbit'];
     $stok = $_POST['stok'];
+    $kategori_ids = $_POST['kategori'];
 
     // Mengambil informasi file gambar
     $file_name = $_FILES['gambar']['name'];
@@ -26,44 +26,51 @@ if (isset($_POST['submit'])) {
         if ($file_size <= 2097152) {
             // Memindahkan file gambar ke folder
             if (move_uploaded_file($file_tmp, $target_file)) {
-                // Query untuk memasukkan data ke dalam tabel Buku
                 $sql = "INSERT INTO buku (Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, Stok) 
                         VALUES ('$judul', '$penulis', '$penerbit', '$tahunTerbit', '$deskripsi', '$target_file', '$stok')";
-
-                // Mengeksekusi query
                 if (mysqli_query($conn, $sql)) {
+                    $buku_id = mysqli_insert_id($conn);
+                    foreach ($kategori_ids as $kategori_id) {
+                        $sql_relasi = "INSERT INTO kategoribuku_relasi (BukuID, KategoriID) VALUES ('$buku_id', '$kategori_id')";
+                        mysqli_query($conn, $sql_relasi);
+                    }
                     echo "<script>
                     alert('Data Berhasil Disimpan');
                         window.location.href='master-buku.php';
                         </script>";
                 } else {
                     echo "<script>
-                alert('Gagal Mengunggah Gambar');
-                window.location.href='tambah-buku.php';
-                </script>";
+                    alert('Gagal Menyimpan Data');
+                    window.location.href='tambah-buku.php';
+                    </script>";
                 }
             } else {
                 echo "<script>
-                alert('Ukuran File Gambar Terlalu Besar');
+                alert('Gagal Mengunggah Gambar');
                 window.location.href='tambah-buku.php';
                 </script>";
             }
         } else {
             echo "<script>
-        alert('Terjadi Kesalahan Saat Menggungah File Gambar');
-        window.location.href='master-buku.php';
-        </script>";
+            alert('Ukuran File Gambar Terlalu Besar');
+            window.location.href='tambah-buku.php';
+            </script>";
         }
+    } else {
+        echo "<script>
+        alert('Terjadi Kesalahan Saat Mengunggah File Gambar');
+        window.location.href='tambah-buku.php';
+        </script>";
     }
 } elseif (isset($_POST['edit'])) {
-    // Mengambil data dari form
-    $id_buku = $_POST['id'];  // ID Buku yang akan diedit
+    $id_buku = $_POST['id'];
     $judul = $_POST['judul'];
     $penulis = $_POST['penulis'];
     $penerbit = $_POST['penerbit'];
     $deskripsi = $_POST['deskripsi'];
     $tahunTerbit = $_POST['tahunterbit'];
     $stok = $_POST['stok'];
+    $kategori_ids = $_POST['kategori'];
 
     // Mengambil informasi file gambar (jika ada)
     $gambar = $_FILES['gambar']['name'];
@@ -83,7 +90,6 @@ if (isset($_POST['submit'])) {
                 WHERE BukuID = $id_buku";
         $result = mysqli_query($conn, $sql);
     } else {
-        // Jika ada gambar baru, kita memindahkannya ke folder yang sesuai
         $folder_gambar = "images/"; // Folder untuk menyimpan gambar
         $target_file = $folder_gambar . basename($gambar);
 
@@ -103,8 +109,10 @@ if (isset($_POST['submit'])) {
                     SET Judul = '$judul', 
                         Penulis = '$penulis', 
                         Penerbit = '$penerbit', 
+                        Deskripsi = '$deskripsi',
                         TahunTerbit = '$tahunTerbit', 
-                        Gambar = '$target_file' 
+                        Gambar = '$target_file', 
+                        Stok = '$stok' 
                     WHERE BukuID = $id_buku";
             $result = mysqli_query($conn, $sql);
         } else {
@@ -115,7 +123,16 @@ if (isset($_POST['submit'])) {
             exit();
         }
     }
+
     if ($result) {
+        $sql_delete_relasi = "DELETE FROM kategoribuku_relasi WHERE BukuID = $id_buku";
+        mysqli_query($conn, $sql_delete_relasi);
+
+        foreach ($kategori_ids as $kategori_id) {
+            $sql_relasi = "INSERT INTO kategoribuku_relasi (BukuID, KategoriID) VALUES ('$id_buku', '$kategori_id')";
+            mysqli_query($conn, $sql_relasi);
+        }
+
         echo "
         <script>
             alert('Data Buku Berhasil diubah');
@@ -125,21 +142,27 @@ if (isset($_POST['submit'])) {
         echo "
         <script>
             alert('Data Buku Gagal diubah');
-            window.location.href='master-buku.php';
+            window.location.href='edit-buku.php?id=$id_buku';
         </script>";
     }
 }
-$id = $_GET['id'];
-$sql = "DELETE FROM buku WHERE BukuID=$id";
-$hapus = mysqli_query($conn, $sql);
 
-if ($hapus) {
-    $del = mysqli_query($conn, "ALTER TABLE buku AUTO_INCREMENT =$id");
-    echo "<script>alert('hapus berhasil');
-    window.location.href='master-buku.php';
-    </script>";
-} else {
-    echo "<script>alert('gagal di hapus');
-    window.location.href='master-buku.php';
-    </script>";
+// Hapus buku
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql_delete_relasi = "DELETE FROM kategoribuku_relasi WHERE BukuID = $id";
+    mysqli_query($conn, $sql_delete_relasi);
+
+    $sql = "DELETE FROM buku WHERE BukuID=$id";
+    $hapus = mysqli_query($conn, $sql);
+
+    if ($hapus) {
+        echo "<script>alert('Hapus berhasil');
+        window.location.href='master-buku.php';
+        </script>";
+    } else {
+        echo "<script>alert('Gagal di hapus');
+        window.location.href='master-buku.php';
+        </script>";
+    }
 }
