@@ -1,7 +1,7 @@
 <?php
 include "navbar.php";
 
-$query = "SELECT * 
+$query = "SELECT peminjaman.*, user.Username, buku.Judul
           FROM peminjaman 
           LEFT JOIN user ON user.UserID = peminjaman.UserID 
           LEFT JOIN buku ON buku.BukuID = peminjaman.BukuID";
@@ -45,12 +45,32 @@ $result = mysqli_query($conn, $query);
                             <td class="py-2 px-4 border"><?= $row['Judul'] ?: 'Data Tidak Tersedia'; ?></td>
                             <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
                             <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>
-                            <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
                             <td class="py-2 px-4 border">
-                                <?php if ($row['StatusPeminjaman'] != 'Sudah Dikembalikan') { ?>
+                                <?php
+                                switch ($row['StatusPeminjaman']) {
+                                    case 'Menunggu Konfirmasi':
+                                        echo 'Menunggu Konfirmasi';
+                                        break;
+                                    case 'Buku Dipinjam':
+                                        echo 'Buku Dipinjam';
+                                        break;
+                                    case 'Buku Dikembalikan':
+                                        echo 'Buku Dikembalikan';
+                                        break;
+                                    default:
+                                        echo 'Status Tidak Diketahui';
+                                        break;
+                                }
+                                ?>
+                            </td>
+                            <td class="py-2 px-4 border text-center">
+                                <?php if ($row['StatusPeminjaman'] == 'Menunggu Konfirmasi') { ?>
+                                    <a href="konfirmasi-peminjaman.php?konfirmasi=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Konfirmasi</a>
+                                <?php } elseif ($row['StatusPeminjaman'] == 'Buku Dipinjam') { ?>
+                                    <span class="text-green-500">Buku Dipinjam</span>
                                     <a href="proses-peminjaman.php?ubah=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Ubah Status</a>
                                 <?php } else { ?>
-                                    <span class="text-green-500">Sudah Dikembalikan</span>
+                                    <span class="text-red-500"><?= $row['StatusPeminjaman']; ?></span>
                                 <?php } ?>
                             </td>
                         </tr>

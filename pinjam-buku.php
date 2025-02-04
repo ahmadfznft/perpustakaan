@@ -10,7 +10,6 @@ $query = "SELECT peminjaman.*, buku.Judul
           ORDER BY peminjaman.TanggalPeminjaman DESC";
 
 $result = mysqli_query($conn, $query);
-
 ?>
 
 <!DOCTYPE html>
@@ -55,15 +54,8 @@ $result = mysqli_query($conn, $query);
                                     <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
 
                                     <td class="py-2 px-4 border text-center">
-                                        <?php if ($_SESSION['RoleID'] == 1) : ?>
-                                            <a href="edit-ulasan.php?id=<?= $row['PeminjamanID'] ?>"
-                                                class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 mr-2">
-                                                Edit
-                                            </a>
-                                        <?php endif; ?>
                                         <?php if ($_SESSION['RoleID'] == 3 || $_SESSION['RoleID'] == 1) : ?>
-                                            <?php if (trim($row['StatusPeminjaman']) != 'Sudah Dikembalikan') :
-                                            ?>
+                                            <?php if (trim($row['StatusPeminjaman']) != 'Buku Dikembalikan') : ?>
                                                 <a href="proses-pinjam.php?hapus=<?= $row['PeminjamanID'] ?>"
                                                     onclick="return confirm('Yakin Untuk Membatalkan Peminjaman ?')"
                                                     class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">

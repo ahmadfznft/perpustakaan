@@ -5,11 +5,11 @@ if (isset($_POST['submit'])) {
     $buku_id = $_POST['buku_id'];
     $tanggal_peminjaman = $_POST['tanggal_peminjaman'];
     $tanggal_pengembalian = $_POST['tanggal_pengembalian'];
-    $status_peminjaman = 'Dipinjam';
+    $status_peminjaman = 'Menunggu Konfirmasi'; 
     $user_id = $_SESSION['UserID'];
 
     // cek user sudah meminjam buku atau belum
-    $query_check = "SELECT COUNT(*) as total FROM peminjaman WHERE UserID = '$user_id' AND StatusPeminjaman = 'Dipinjam'";
+    $query_check = "SELECT COUNT(*) as total FROM peminjaman WHERE UserID = '$user_id' AND StatusPeminjaman = 'Buku Dipinjam'";
     $result_check = mysqli_query($conn, $query_check);
     $data_check = mysqli_fetch_assoc($result_check);
 
@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
 
         if (mysqli_query($conn, $query)) {
             echo "<script>
-                    alert('Peminjaman Berhasil Dilakukan');
+                    alert('Peminjaman Berhasil Dilakukan, menunggu konfirmasi admin.');
                     window.location.href='pinjam-buku.php';
                 </script>";
         } else {
@@ -90,3 +90,4 @@ if (isset($_GET['hapus'])) {
         </script>";
     }
 }
+?>

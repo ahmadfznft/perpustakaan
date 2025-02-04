@@ -11,13 +11,6 @@ $qrating = "SELECT b.*,
           LEFT JOIN ulasanbuku u ON b.BukuID = u.BukuID 
           GROUP BY b.BukuID";
 $result = mysqli_query($conn, $qrating);
-
-// function cekFavorit($conn, $userID, $bukuID)
-// {
-//     $query = "SELECT * FROM favorit WHERE UserID = '$userID' AND BukuID = '$bukuID'";
-//     $result = mysqli_query($conn, $query);
-//     return mysqli_num_rows($result) > 0;
-// }
 ?>
 
 <!DOCTYPE html>

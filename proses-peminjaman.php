@@ -1,38 +1,38 @@
 <?php
- include "connection.php";
+include "connection.php";
+
 if (isset($_GET['ubah'])) {
     $peminjamanID = $_GET['ubah'];
 
-    $queryBukuID = "SELECT BukuID FROM peminjaman WHERE PeminjamanID = ?";
-    $stmtBukuID = $conn->prepare($queryBukuID);
-    $stmtBukuID->bind_param("i", $peminjamanID);
-    $stmtBukuID->execute();
-    $resultBukuID = $stmtBukuID->get_result();
-    $rowBukuID = $resultBukuID->fetch_assoc();
-    $bukuID = $rowBukuID['BukuID'];
+    $queryBukuID = "SELECT BukuID, StatusPeminjaman FROM peminjaman WHERE PeminjamanID = $peminjamanID";
+    $resultBukuID = mysqli_query($conn, $queryBukuID);
+    $rowBukuID = mysqli_fetch_assoc($resultBukuID);
 
-    // Update status peminjaman
-    $queryUpdateStatus = "UPDATE peminjaman SET StatusPeminjaman = 'Sudah Dikembalikan' WHERE PeminjamanID = ?";
-    $stmtUpdateStatus = $conn->prepare($queryUpdateStatus);
-    $stmtUpdateStatus->bind_param("i", $peminjamanID);
+    if ($rowBukuID) {
+        $bukuID = $rowBukuID['BukuID'];
+        $statusPeminjaman = $rowBukuID['StatusPeminjaman'];
 
-    if ($stmtUpdateStatus->execute()) {
-        // Update stok buku
-        $queryUpdateStok = "UPDATE buku SET Stok = Stok + 1 WHERE BukuID = ?";
-        $stmtUpdateStok = $conn->prepare($queryUpdateStok);
-        $stmtUpdateStok->bind_param("i", $bukuID);
-        $stmtUpdateStok->execute();
+        if ($statusPeminjaman == 'Buku Dipinjam') {
+            $queryUpdateStatus = "UPDATE peminjaman SET StatusPeminjaman = 'Buku Dikembalikan' WHERE PeminjamanID = $peminjamanID";
 
-        // Redirect kembali ke halaman data peminjam setelah berhasil
-        $_SESSION['message'] = "Status peminjaman berhasil diubah dan stok buku diperbarui.";
-        header("Location: data-peminjam.php?status=success");
-        exit();
+            if (mysqli_query($conn, $queryUpdateStatus)) {
+                $queryUpdateStok = "UPDATE buku SET Stok = Stok + 1 WHERE BukuID = $bukuID";
+                mysqli_query($conn, $queryUpdateStok);
+
+                $_SESSION['message'] = "Status peminjaman berhasil diubah dan stok buku diperbarui.";
+                header("Location: data-peminjam.php?status=success");
+                exit();
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+        } else {
+            echo "Status peminjaman tidak dapat diubah.";
+        }
     } else {
-        // Jika gagal, bisa menampilkan pesan error
-        echo "Error: " . $stmtUpdateStatus->error;
+        echo "ID peminjaman tidak ditemukan.";
     }
 
-    $stmtUpdateStatus->close();
-    $stmtBukuID->close();
-    $conn->close();
+    mysqli_close($conn);
+} else {
+    echo "Tidak ada ID peminjaman yang diberikan.";
 }
