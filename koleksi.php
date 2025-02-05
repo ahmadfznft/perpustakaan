@@ -1,25 +1,13 @@
 <?php
 include 'navbar.php';
-
-// Pastikan userID tersedia di session
-if (!isset($_SESSION['UserID'])) {
-    die("User ID tidak ditemukan dalam sesi.");
-}
-
-// Ambil ID pengguna yang sedang login
 $iduser = $_SESSION['UserID'];
 
-// Query untuk mengambil data buku dalam koleksi pribadi pengguna
 $query = "SELECT k.KoleksiID, b.Judul, b.Penulis, b.Penerbit, b.TahunTerbit, b.Gambar, b.BukuID 
           FROM koleksipribadi k 
           INNER JOIN buku b ON k.BukuID = b.BukuID 
           WHERE k.UserID = $iduser";
 
 $result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die("Query Error: " . mysqli_error($conn));
-}
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +65,7 @@ if (!$result) {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php while ($book = mysqli_fetch_assoc($result)) { ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <!-- Pastikan path gambar benar -->
+
                     <img src="<?= htmlspecialchars($book['Gambar']) ?>" class="w-full h-auto object-cover" alt="Cover Buku">
                     <div class="p-4">
                         <h5 class="text-xl font-semibold"><?= htmlspecialchars($book['Judul']) ?></h5>
@@ -87,17 +75,8 @@ if (!$result) {
 
                         <a href="tambah-peminjaman.php?id=<?= $book['BukuID'] ?>" class="block w-full text-center py-2 mt-4 bg-green-500 text-white rounded-lg hover:bg-green-600">Pinjam Buku</a>
                         <a href="proses-koleksi.php?id=<?= $book['KoleksiID']; ?>" class="block w-full text-center py-2 mt-2 bg-red-500 text-white rounded-lg hover:bg-red-600" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini dari koleksi Anda?')">Hapus dari Koleksi</a>
+                        <a href="detail-buku.php?id=<?= $book['BukuID']; ?>" class="block w-full text-center py-2 mt-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Detail Buku</a>
 
-                        <!-- Tombol Detail untuk membuka Modal -->
-                        <button type="button" class="block w-full text-center py-2 mt-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" data-toggle="modal" data-target="#detailModal"
-                            data-id="<?= htmlspecialchars($book['BukuID']) ?>"
-                            data-judul="<?= htmlspecialchars($book['Judul']) ?>"
-                            data-penulis="<?= htmlspecialchars($book['Penulis']) ?>"
-                            data-penerbit="<?= htmlspecialchars($book['Penerbit']) ?>"
-                            data-tahunterbit="<?= htmlspecialchars($book['TahunTerbit']) ?>"
-                            data-gambar="<?= htmlspecialchars($book['Gambar']) ?>">
-                            Detail
-                        </button>
                     </div>
                 </div>
             <?php } ?>
@@ -107,26 +86,6 @@ if (!$result) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        // Mengisi modal dengan detail buku saat tombol Detail diklik
-        $('#detailModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Tombol yang diklik
-            var bukuID = button.data('id');
-            var judul = button.data('judul');
-            var penulis = button.data('penulis');
-            var penerbit = button.data('penerbit');
-            var tahunterbit = button.data('tahunterbit');
-            var gambar = button.data('gambar');
-
-            var modal = $(this);
-            modal.find('#bookTitle').text(judul);
-            modal.find('#bookAuthor').text(penulis);
-            modal.find('#bookPublisher').text(penerbit);
-            modal.find('#bookYear').text(tahunterbit);
-            modal.find('#bookImage').attr('src', 'images/' + gambar);
-        });
-    </script>
 </body>
 
 </html>

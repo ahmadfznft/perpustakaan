@@ -36,11 +36,30 @@ $result = mysqli_query($conn, $query);
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header,
+        .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: #555;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th,
@@ -53,12 +72,25 @@ $result = mysqli_query($conn, $query);
         th {
             background-color: #f2f2f2;
         }
+
+        .no-data {
+            text-align: center;
+            font-style: italic;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Cetak Laporan Peminjaman Buku</h1>
-    <h2>Periode: <?= htmlspecialchars($start_date) ?> s/d <?= htmlspecialchars($end_date) ?></h2>
+    <div class="header">
+        <h1>Perpustakaan Digital Xenon</h1>
+        <div class="footer">
+            <p>Jl. Daeng Moh. Ardiwinata, Cibabat, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40513</p>
+            <p>Telp: (021) 12345678 | Email: perpusdigitalxenon@perpus.go.id</p>
+        </div>
+        <hr>
+        <h2>Laporan Peminjaman Buku</h2>
+        <h2>Periode: <?= htmlspecialchars($start_date) ?> s/d <?= htmlspecialchars($end_date) ?></h2>
+    </div>
 
     <table>
         <thead>
@@ -88,7 +120,7 @@ $result = mysqli_query($conn, $query);
             <?php
                 }
             } else {
-                echo "<tr><td colspan='6' style='text-align:center;'>Tidak ada data peminjaman.</td></tr>";
+                echo "<tr><td colspan='6' class='no-data'>Tidak ada data peminjaman.</td></tr>";
             }
             ?>
         </tbody>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Jan 2025 pada 09.10
+-- Waktu pembuatan: 05 Feb 2025 pada 06.02
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -43,7 +43,7 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`BukuID`, `Judul`, `Penulis`, `Penerbit`, `TahunTerbit`, `Deskripsi`, `Gambar`, `Stok`) VALUES
-(1, 'Burlian', 'Tere Liye', 'Republika', 2009, 'Novel yang mengangkat tema persahabatan dan kekeluargaan dengan latar kehidupan anak-anak di Pulau Sumatera pada era Orde Baru. Cerita ini berfokus pada kehidupan Burlian, seorang anak dari keluarga kurang mampu yang tinggal di desa terpencil. Meskipun dikenal sebagai \"si Anak Spesial,\" Burlian harus menghadapi berbagai tantangan hidup, salah satunya adalah pendidikan yang sangat dihargai oleh orang tuanya.\r\nKehidupan Burlian dipenuhi petualangan dan kenakalan bersama kakak dan adiknya. Meskipun sering berbuat nakal, Burlian belajar banyak dari orang tuanya, terutama dari hukuman yang diberikan Mamak dan Bapak yang mendidiknya dengan cara bijak tanpa kekerasan. Salah satu pelajaran berharga adalah pentingnya pendidikan, yang disampaikan melalui pengalaman kerja keras di kebun dan hutan.\r\nBurlian juga menjalin persahabatan dengan Nakamura-San, seorang pria Jepang yang datang ke desa mereka untuk proyek pembangunan. Persahabatan ini membuka jalan bagi Burlian untuk meraih impian, yaitu mendapatkan beasiswa ke Jepang.\r\nNovel ini mengajarkan nilai-nilai seperti kesederhanaan, kerja keras, kejujuran, kasih sayang, dan pengorbanan orang tua. Meskipun ada beberapa bagian cerita yang terasa lambat, novel ini tetap memberikan pesan inspiratif bagi pembaca, terutama anak-anak.', 'images/burlian.jpeg', 3),
+(1, 'Burlian', 'Tere Liye', 'Republika', 2009, 'Novel yang mengangkat tema persahabatan dan kekeluargaan dengan latar kehidupan anak-anak di Pulau Sumatera pada era Orde Baru. Cerita ini berfokus pada kehidupan Burlian, seorang anak dari keluarga kurang mampu yang tinggal di desa terpencil. Meskipun dikenal sebagai \"si Anak Spesial,\" Burlian harus menghadapi berbagai tantangan hidup, salah satunya adalah pendidikan yang sangat dihargai oleh orang tuanya.\r\nKehidupan Burlian dipenuhi petualangan dan kenakalan bersama kakak dan adiknya. Meskipun sering berbuat nakal, Burlian belajar banyak dari orang tuanya, terutama dari hukuman yang diberikan Mamak dan Bapak yang mendidiknya dengan cara bijak tanpa kekerasan. Salah satu pelajaran berharga adalah pentingnya pendidikan, yang disampaikan melalui pengalaman kerja keras di kebun dan hutan.\r\nBurlian juga menjalin persahabatan dengan Nakamura-San, seorang pria Jepang yang datang ke desa mereka untuk proyek pembangunan. Persahabatan ini membuka jalan bagi Burlian untuk meraih impian, yaitu mendapatkan beasiswa ke Jepang.\r\nNovel ini mengajarkan nilai-nilai seperti kesederhanaan, kerja keras, kejujuran, kasih sayang, dan pengorbanan orang tua. Meskipun ada beberapa bagian cerita yang terasa lambat, novel ini tetap memberikan pesan inspiratif bagi pembaca, terutama anak-anak.', 'images/burlian.jpeg', 2),
 (2, 'Bulan', 'Tere Liye', 'Gramedia Pustaka Utama', 2015, 'Setelah pertempuran di Klan Bulan, Raib, Seli, dan Ali kembali menjalani kehidupan normal di Klan Bumi. Enam bulan kemudian, Miss Selena datang untuk mengajak mereka ke Klan Matahari untuk tujuan diplomasi. Setibanya di sana, mereka ikut serta dalam Festival Matahari, sebuah kompetisi berbahaya untuk menemukan bunga matahari pertama yang mekar. Bersama Ily, putra Ilo, mereka melewati berbagai rintangan seperti padang perdu, danau, dan pegunungan, serta bertarung melawan monster dan gorila mengamuk.\r\n\r\nPetualangan ini mengajarkan pentingnya kerja sama, sikap positif, dan ketangguhan dalam menghadapi tantangan. Novel ini penuh dengan misteri yang terungkap, namun masih banyak teka-teki baru yang harus dipecahkan.', 'images/bulan.jpeg', 5),
 (3, 'Matahari', 'Tere Liye', 'Kompas Gramedia', 2018, 'melanjutkan petualangan Raib, Seli, dan Ali setelah tewasnya sahabat mereka, Ily. Mereka kembali ke klan Bumi, namun Ali terlibat dalam kontroversi kompetisi basket dan mulai mengembangkan teknologi baru dari klan Matahari dan Bulan. Ali kemudian mengajak Raib dan Seli untuk mengeksplorasi klan Bintang, meskipun Raib menolak menggunakan Buku Kehidupan yang bisa menghancurkan kepercayaan Miss Selena.\r\n\r\nMereka melakukan perjalanan menggunakan pesawat kapsul versi kedua, Ily, menuju gua yang mengarah ke sebuah lorong kuno. Dalam perjalanan, mereka terjebak dalam konflik di Lembah Hijau dan kota Zaramaraz, dihadapkan pada pasukan bayangan dan pengadilan yang melarang kekuatan mereka. Ketiga sekawan ini akhirnya berhadapan dengan Marsekal Laar dan terlibat dalam pertempuran besar.\r\n\r\nKetegangan meningkat saat Ali, Raib, dan Seli berusaha merebut kembali Buku Kehidupan Raib, namun mereka tertangkap dan dibawa ke ruangan isolasi. Pertarungan seru berlanjut, dengan kekuatan mereka yang saling terhubung. Di akhir cerita, Ali melompat ke portal menuju klan Komet, membawa mereka ke dunia paralel yang semakin penuh ancaman.\r\n\r\nNovel ini mengisahkan petualangan, pertarungan, dan tantangan baru yang harus dihadapi oleh ketiga sahabat dalam dunia paralel yang penuh bahaya.', 'images/matahari.jpeg', 5),
 (4, 'Bumi', 'Tere Liye', 'Gramedia Pustaka Utama', 2019, 'Novel Bumi menceritakan petualangan tiga remaja—Raib, Seli, dan Ali—yang memiliki kekuatan luar biasa dan terikat takdir untuk menyelamatkan Bumi dari kehancuran. Raib, keturunan Klan Bulan, memiliki kemampuan menghilang dan menguasai Buku Kehidupan; Seli, dari Klan Matahari, memiliki kekuatan api dan tekad kuat; dan Ali, dari Klan Bumi, bisa berkomunikasi dengan hewan. Ketiganya menyadari kekuatan mereka setelah insiden tower listrik, yang kemudian membawa mereka ke dunia paralel.\r\n\r\nMereka menjelajahi Klan Bulan, Klan Matahari, dan Klan Bumi, menghadapi berbagai bahaya seperti monster dan pasukan Tamus, sosok jahat yang ingin menguasai dunia. Dalam perjalanan, mereka bertemu karakter-karakter fantastis yang membantu mereka mengungkap rahasia dunia paralel dan berusaha mengalahkan Tamus.', 'images/bumin.jpg', 6),
@@ -66,15 +66,20 @@ CREATE TABLE `kategoribuku_relasi` (
 --
 
 INSERT INTO `kategoribuku_relasi` (`KategoriBukuID`, `BukuID`, `KategoriID`) VALUES
-(1, 6, 4),
-(2, 6, 6),
-(9, 3, 1),
-(10, 3, 5),
-(11, 3, 12),
-(12, 2, 12),
 (13, 4, 1),
 (14, 4, 5),
-(15, 4, 12);
+(15, 4, 12),
+(18, 6, 4),
+(19, 6, 6),
+(20, 6, 12),
+(24, 3, 1),
+(25, 3, 5),
+(26, 3, 12),
+(27, 1, 1),
+(28, 1, 12),
+(29, 2, 1),
+(30, 2, 5),
+(31, 2, 12);
 
 -- --------------------------------------------------------
 
@@ -116,6 +121,13 @@ CREATE TABLE `koleksipribadi` (
   `BukuID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `koleksipribadi`
+--
+
+INSERT INTO `koleksipribadi` (`KoleksiID`, `UserID`, `BukuID`) VALUES
+(6, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -128,7 +140,7 @@ CREATE TABLE `peminjaman` (
   `BukuID` int(11) NOT NULL,
   `TanggalPeminjaman` date NOT NULL,
   `TanggalPengembalian` date NOT NULL,
-  `StatusPeminjaman` varchar(50) NOT NULL
+  `StatusPeminjaman` enum('Menunggu Konfirmasi','Buku Dipinjam','Buku Dikembalikan') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -136,8 +148,10 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`PeminjamanID`, `UserID`, `BukuID`, `TanggalPeminjaman`, `TanggalPengembalian`, `StatusPeminjaman`) VALUES
-(6, 2, 1, '2025-01-29', '2025-01-30', 'Sudah Dikembalikan'),
-(7, 2, 2, '2025-01-29', '2025-01-30', 'Sudah Dikembalikan');
+(7, 1, 1, '2025-02-04', '2025-02-05', 'Buku Dikembalikan'),
+(8, 2, 1, '2025-02-04', '2025-02-05', 'Buku Dikembalikan'),
+(9, 2, 1, '2025-02-05', '2025-02-06', 'Buku Dikembalikan'),
+(10, 2, 1, '2025-02-05', '2025-02-06', 'Buku Dikembalikan');
 
 -- --------------------------------------------------------
 
@@ -179,7 +193,10 @@ CREATE TABLE `ulasanbuku` (
 --
 
 INSERT INTO `ulasanbuku` (`UlasanID`, `UserID`, `BukuID`, `Ulasan`, `rating`, `tanggalUlasan`) VALUES
-(23, 2, 2, 'bagus banget bang bukunya aku suka', 0, '2025-01-30');
+(23, 2, 2, 'bagus banget bang bukunya aku suka', 0, '2025-01-30'),
+(24, 2, 6, 'ok', 0, '2025-02-02'),
+(25, 2, 6, 'ini mantap', 0, '2025-02-02'),
+(26, 2, 1, 'ini sih oke bukunya', 2, '2025-02-02');
 
 -- --------------------------------------------------------
 
@@ -272,7 +289,7 @@ ALTER TABLE `buku`
 -- AUTO_INCREMENT untuk tabel `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
-  MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori_buku`
@@ -284,13 +301,13 @@ ALTER TABLE `kategori_buku`
 -- AUTO_INCREMENT untuk tabel `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
-  MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `role`
@@ -302,7 +319,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT untuk tabel `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
-  MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

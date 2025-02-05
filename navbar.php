@@ -4,7 +4,6 @@ include "connection.php";
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" />
 
-<!-- Tailwind-css Navbar  -->
 <nav class="bg-indigo-700 shadow-lg">
     <div class="container mx-auto">
         <div class="sm:flex justify-around">

@@ -4,6 +4,7 @@ include 'navbar.php';
 $start_date = '';
 $end_date = '';
 $query = "";
+$result = null;
 
 if (isset($_POST['submit'])) {
     if (empty($_POST['start_date']) || empty($_POST['end_date'])) {
@@ -21,19 +22,10 @@ if (isset($_POST['submit'])) {
                       LEFT JOIN user ON user.UserID = peminjaman.UserID 
                       LEFT JOIN buku ON buku.BukuID = peminjaman.BukuID
                       WHERE TanggalPeminjaman BETWEEN '$start_date' AND '$end_date'";
+            $result = mysqli_query($conn, $query);
         }
     }
 }
-
-// Jika tidak ada input dari form, gunakan query default
-if (empty($query)) {
-    $query = "SELECT * 
-              FROM peminjaman 
-              LEFT JOIN user ON user.UserID = peminjaman.UserID 
-              LEFT JOIN buku ON buku.BukuID = peminjaman.BukuID";
-}
-
-$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -94,23 +86,26 @@ $result = mysqli_query($conn, $query);
                     </thead>
                     <tbody>
                         <?php
-
-                        if (mysqli_num_rows($result) > 0) {
-                            $no = 1;
-                            while ($row = mysqli_fetch_assoc($result)) {
+                        if ($result) {
+                            if (mysqli_num_rows($result) > 0) {
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="py-2 px-4 border text-center"><?= $no++; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['Username'] ?: 'Data Tidak Tersedia'; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['Judul'] ?: 'Data Tidak Tersedia'; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>
-                                    <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
-                                </tr>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="py-2 px-4 border text-center"><?= $no++; ?></td>
+                                        <td class="py-2 px-4 border"><?= $row['Username'] ?: 'Data Tidak Tersedia'; ?></td>
+                                        <td class="py-2 px-4 border"><?= $row['Judul'] ?: 'Data Tidak Tersedia'; ?></td>
+                                        <td class="py-2 px-4 border"><?= $row['TanggalPeminjaman']; ?></td>
+                                        <td class="py-2 px-4 border"><?= $row['TanggalPengembalian']; ?></td>
+                                        <td class="py-2 px-4 border"><?= $row['StatusPeminjaman']; ?></td>
+                                    </tr>
                         <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='6' class='py-2 px-4 border text-center'>Tidak ada data peminjaman.</td></tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='6' class='py-2 px-4 border text-center'>Tidak ada data peminjaman.</td></tr>";
+                            echo "<tr><td colspan='6' class='py-2 px-4 border text-center'>Silakan pilih tanggal terlebih dahulu.</td></tr>";
                         }
                         ?>
                     </tbody>

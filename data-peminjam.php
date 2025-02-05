@@ -67,10 +67,7 @@ $result = mysqli_query($conn, $query);
                                 <?php if ($row['StatusPeminjaman'] == 'Menunggu Konfirmasi') { ?>
                                     <a href="konfirmasi-peminjaman.php?konfirmasi=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Konfirmasi</a>
                                 <?php } elseif ($row['StatusPeminjaman'] == 'Buku Dipinjam') { ?>
-                                    <span class="text-green-500">Buku Dipinjam</span>
                                     <a href="proses-peminjaman.php?ubah=<?= $row['PeminjamanID']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Ubah Status</a>
-                                <?php } else { ?>
-                                    <span class="text-red-500"><?= $row['StatusPeminjaman']; ?></span>
                                 <?php } ?>
                             </td>
                         </tr>

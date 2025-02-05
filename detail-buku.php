@@ -1,6 +1,8 @@
 <?php
 include 'navbar.php';
 
+$user_id = $_SESSION['UserID'];
+
 $id_buku = $_GET['id'];
 
 $query = "SELECT * FROM buku WHERE BukuID = $id_buku";
@@ -18,7 +20,6 @@ $qulasan = "SELECT ulasanbuku.*, user.Username
                    JOIN user ON ulasanbuku.UserID = user.UserID 
                    WHERE ulasanbuku.BukuID = $id_buku";
 $result_komentar = mysqli_query($conn, $qulasan);
-
 ?>
 
 <!DOCTYPE html>
@@ -35,25 +36,25 @@ $result_komentar = mysqli_query($conn, $qulasan);
         <div class="bg-white rounded-lg shadow-md p-4">
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div class="flex justify-center">
-                    <img src="<?= htmlspecialchars($buku['Gambar']) ?>" alt="<?= htmlspecialchars($buku['Judul']) ?>" class="w-[200px] h-[300px] rounded-lg object-cover">
+                    <img src="<?= $buku['Gambar'] ?>" alt="<?= $buku['Judul'] ?>" class="w-[200px] h-[300px] rounded-lg object-cover">
                 </div>
 
                 <div class="space-y-3 self-start">
-                    <h2 class="text-xl font-semibold text-gray-800"><?= htmlspecialchars($buku['Judul']) ?></h2>
-                    <p class="text-gray-700 text-sm"><span class="font-medium">Penulis:</span> <?= htmlspecialchars($buku['Penulis']) ?></p>
-                    <p class="text-gray-700 text-sm"><span class="font-medium">Penerbit:</span> <?= htmlspecialchars($buku['Penerbit']) ?></p>
-                    <p class="text-gray-700 text-sm"><span class="font-medium">Tahun Terbit:</span> <?= htmlspecialchars($buku['TahunTerbit']) ?></p>
+                    <h2 class="text-xl font-semibold text-gray-800"><?= $buku['Judul'] ?></h2>
+                    <p class="text-gray-700 text-sm"><span class="font-medium">Penulis:</span> <?= $buku['Penulis'] ?></p>
+                    <p class="text-gray-700 text-sm"><span class="font-medium">Penerbit:</span> <?= $buku['Penerbit'] ?></p>
+                    <p class="text-gray-700 text-sm"><span class="font-medium">Tahun Terbit:</span> <?= $buku['TahunTerbit'] ?></p>
                     <p class="text-gray-700 text-sm">
                         <span class="font-medium">Deskripsi :</span>
-                        <span id="short-description"><?= htmlspecialchars(mb_strimwidth($buku['Deskripsi'], 0, 150, "...")) ?></span>
-                        <span id="full-description" class="hidden"><?= htmlspecialchars($buku['Deskripsi']) ?></span>
+                        <span id="short-description"><?= mb_strimwidth($buku['Deskripsi'], 0, 150, "...") ?></span>
+                        <span id="full-description" class="hidden"><?= $buku['Deskripsi'] ?></span>
                         <a href="javascript:void(0)" id="toggle-description" class="text-blue-500">Baca Selengkapnya</a>
                     </p>
                     <p class="text-gray-700 text-sm"><span class="font-medium">Kategori:</span>
                         <?php
                         $kategori_list = [];
                         while ($kategori = $result_kategori->fetch_assoc()) {
-                            $kategori_list[] = "<span class='text-sm text-dark'>" . htmlspecialchars($kategori['NamaKategori']) . "</span>";
+                            $kategori_list[] = "<span class='text-sm text-dark'>" . $kategori['NamaKategori'] . "</span>";
                         }
                         echo implode(", ", $kategori_list);
                         ?>
@@ -70,14 +71,14 @@ $result_komentar = mysqli_query($conn, $qulasan);
                                 <div class="flex gap-3">
                                     <!-- Avatar -->
                                     <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <span class="text-sm font-sm"><?= htmlspecialchars(substr($komentar['Username'], 0, 1)) ?></span>
+                                        <span class="text-sm font-sm"><?= substr($komentar['Username'], 0, 1) ?></span>
                                     </div>
 
                                     <!-- Komentar content -->
                                     <div class="flex-1">
                                         <div class="flex items-center gap-2">
-                                            <span class="font-semibold"><?= htmlspecialchars($komentar['Username']) ?></span>
-                                            <span><?= htmlspecialchars($komentar['Ulasan']) ?></span>
+                                            <span class="font-semibold"><?= $komentar['Username'] ?></span>
+                                            <span><?= $komentar['Ulasan'] ?></span>
                                             <div class="text-sm text-gray-500">Rating:<span class="ml-2 text-yellow-500 text-sm"><?= str_repeat("★", $komentar['rating']) ?></div>
                                         </div>
 
@@ -110,6 +111,11 @@ $result_komentar = mysqli_query($conn, $qulasan);
                 </div>
             </div>
         </div>
+        <form method="POST" action="proses-koleksi.php">
+            <input type="hidden" name="bukuID" value="<?= $id_buku ?>">
+            <input type="hidden" name="userID" value="<?= $user_id ?>">
+            <button type="submit" class="text-blue-500 font-semibold" name="tambah">Tambah ke Favorit</button>
+        </form>
     </div>
 
     <script>
