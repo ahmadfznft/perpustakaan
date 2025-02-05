@@ -18,6 +18,7 @@ $result = mysqli_query($conn, $qrating);
 
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>perpustakaan xenon</title>
 </head>
 
 <body class="bg-gray-100">
