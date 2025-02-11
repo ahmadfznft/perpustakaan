@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Feb 2025 pada 08.44
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Feb 11, 2025 at 03:36 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `buku`
+-- Table structure for table `buku`
 --
 
 CREATE TABLE `buku` (
@@ -39,7 +39,7 @@ CREATE TABLE `buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `buku`
+-- Dumping data for table `buku`
 --
 
 INSERT INTO `buku` (`BukuID`, `Judul`, `Penulis`, `Penerbit`, `TahunTerbit`, `Deskripsi`, `Gambar`, `Stok`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `buku` (`BukuID`, `Judul`, `Penulis`, `Penerbit`, `TahunTerbit`, `De
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategoribuku_relasi`
+-- Table structure for table `kategoribuku_relasi`
 --
 
 CREATE TABLE `kategoribuku_relasi` (
@@ -66,7 +66,7 @@ CREATE TABLE `kategoribuku_relasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `kategoribuku_relasi`
+-- Dumping data for table `kategoribuku_relasi`
 --
 
 INSERT INTO `kategoribuku_relasi` (`KategoriBukuID`, `BukuID`, `KategoriID`) VALUES
@@ -95,7 +95,7 @@ INSERT INTO `kategoribuku_relasi` (`KategoriBukuID`, `BukuID`, `KategoriID`) VAL
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori_buku`
+-- Table structure for table `kategori_buku`
 --
 
 CREATE TABLE `kategori_buku` (
@@ -104,7 +104,7 @@ CREATE TABLE `kategori_buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `kategori_buku`
+-- Dumping data for table `kategori_buku`
 --
 
 INSERT INTO `kategori_buku` (`KategoriID`, `NamaKategori`) VALUES
@@ -126,7 +126,7 @@ INSERT INTO `kategori_buku` (`KategoriID`, `NamaKategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `koleksipribadi`
+-- Table structure for table `koleksipribadi`
 --
 
 CREATE TABLE `koleksipribadi` (
@@ -136,7 +136,7 @@ CREATE TABLE `koleksipribadi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `koleksipribadi`
+-- Dumping data for table `koleksipribadi`
 --
 
 INSERT INTO `koleksipribadi` (`KoleksiID`, `UserID`, `BukuID`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `koleksipribadi` (`KoleksiID`, `UserID`, `BukuID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `peminjaman`
+-- Table structure for table `peminjaman`
 --
 
 CREATE TABLE `peminjaman` (
@@ -158,7 +158,7 @@ CREATE TABLE `peminjaman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `peminjaman`
+-- Dumping data for table `peminjaman`
 --
 
 INSERT INTO `peminjaman` (`PeminjamanID`, `UserID`, `BukuID`, `TanggalPeminjaman`, `TanggalPengembalian`, `StatusPeminjaman`) VALUES
@@ -167,7 +167,7 @@ INSERT INTO `peminjaman` (`PeminjamanID`, `UserID`, `BukuID`, `TanggalPeminjaman
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -176,7 +176,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`RoleID`, `NamaRole`) VALUES
@@ -187,7 +187,7 @@ INSERT INTO `role` (`RoleID`, `NamaRole`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ulasanbuku`
+-- Table structure for table `ulasanbuku`
 --
 
 CREATE TABLE `ulasanbuku` (
@@ -200,7 +200,7 @@ CREATE TABLE `ulasanbuku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ulasanbuku`
+-- Dumping data for table `ulasanbuku`
 --
 
 INSERT INTO `ulasanbuku` (`UlasanID`, `UserID`, `BukuID`, `Ulasan`, `rating`, `tanggalUlasan`) VALUES
@@ -212,7 +212,7 @@ INSERT INTO `ulasanbuku` (`UlasanID`, `UserID`, `BukuID`, `Ulasan`, `rating`, `t
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -226,7 +226,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `NamaLengkap`, `Alamat`) VALUES
@@ -239,101 +239,101 @@ INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `NamaLe
 --
 
 --
--- Indeks untuk tabel `buku`
+-- Indexes for table `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`BukuID`);
 
 --
--- Indeks untuk tabel `kategoribuku_relasi`
+-- Indexes for table `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
   ADD PRIMARY KEY (`KategoriBukuID`);
 
 --
--- Indeks untuk tabel `kategori_buku`
+-- Indexes for table `kategori_buku`
 --
 ALTER TABLE `kategori_buku`
   ADD PRIMARY KEY (`KategoriID`);
 
 --
--- Indeks untuk tabel `koleksipribadi`
+-- Indexes for table `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
   ADD PRIMARY KEY (`KoleksiID`);
 
 --
--- Indeks untuk tabel `peminjaman`
+-- Indexes for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`PeminjamanID`);
 
 --
--- Indeks untuk tabel `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`RoleID`);
 
 --
--- Indeks untuk tabel `ulasanbuku`
+-- Indexes for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
   ADD PRIMARY KEY (`UlasanID`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`UserID`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `buku`
+-- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
   MODIFY `BukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `kategoribuku_relasi`
+-- AUTO_INCREMENT for table `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
   MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori_buku`
+-- AUTO_INCREMENT for table `kategori_buku`
 --
 ALTER TABLE `kategori_buku`
   MODIFY `KategoriID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `koleksipribadi`
+-- AUTO_INCREMENT for table `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
   MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `peminjaman`
+-- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `role`
+-- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `ulasanbuku`
+-- AUTO_INCREMENT for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
   MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
