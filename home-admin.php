@@ -11,13 +11,20 @@
 <body class="bg-gray-100">
     <?php include "navbar.php";
 
+
     $userCount = $conn->query("SELECT COUNT(*) as count FROM user")->fetch_assoc()['count'];
     $roleCount = $conn->query("SELECT COUNT(*) as count FROM role")->fetch_assoc()['count'];
     $categoryCount = $conn->query("SELECT COUNT(*) as count FROM kategori_buku")->fetch_assoc()['count'];
     $bookCount = $conn->query("SELECT COUNT(*) as count FROM buku")->fetch_assoc()['count'];
     $borrowerCount = $conn->query("SELECT COUNT(*) as count FROM peminjaman")->fetch_assoc()['count'];
+
+    $userId = $_SESSION['UserID']; // Pastikan UserID disimpan di session saat login
+    $userQuery = $conn->query("SELECT Username FROM user WHERE UserID = '$userId'");
+    $row = $userQuery->fetch_assoc();
     ?>
 
+
+    <h1 class="text-3xl font-semibold text-center mt-6">Selamat datang, <?php echo $row['Username']; ?>!</h1>
     <div class="flex">
 
         <main class="flex-1 p-4">
