@@ -33,7 +33,7 @@
             <button type="submit" name="ubah" class="w-full mt-4 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg focus:outline-none">Ubah</button>
         </form>
     </div>
-
+    
 </body>
 
 </html>
